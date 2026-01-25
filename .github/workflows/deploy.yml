@@ -49,9 +49,8 @@ jobs:
           # - SITE_BASE_PATH: path segment for GitHub Pages project sites; set to "ROOT" for empty base path
           SITE_URL_VALUE="${SITE_URL:-}"
           SITE_BASE_PATH_VALUE="${SITE_BASE_PATH:-}"
-          if [[ "${SITE_BASE_PATH_VALUE}" == "ROOT" ]]; then
-            SITE_BASE_PATH_VALUE=""
-          fi
+          # NOTE: keep the literal string "ROOT" as a sentinel so next.config.mjs can map it to an empty basePath.
+          # If we turn it into an empty string here, the fallback below would overwrite it back to DEFAULT_BASE_PATH.
           if [[ -z "${SITE_BASE_PATH_VALUE}" ]]; then
             SITE_BASE_PATH_VALUE="${DEFAULT_BASE_PATH}"
           fi
