@@ -154,17 +154,8 @@ export default async function SkillPage({ params }: { params: { skillId: string 
           <span className="chip">{filePaths.length} files</span>
         </div>
 
-        <div style={{ marginTop: 12, display: "grid", gridTemplateColumns: "1fr", gap: 8 }}>
-          <div
-            style={{
-              border: "1px solid rgba(11, 11, 16, 0.14)",
-              borderRadius: 14,
-              padding: 12,
-              background: "rgba(255, 255, 255, 0.6)"
-            }}
-          >
-            <Tree node={tree.root} toSorted={tree.toSorted} />
-          </div>
+        <div className="fileTree" style={{ marginTop: 12 }}>
+          <Tree node={tree.root} toSorted={tree.toSorted} depth={0} />
         </div>
       </section>
 
@@ -174,7 +165,7 @@ export default async function SkillPage({ params }: { params: { skillId: string 
           <p className="muted" style={{ margin: "8px 0 0", lineHeight: 1.6 }}>
             Same category, overlapping tags.
           </p>
-          <div className="grid cards" style={{ marginTop: 14 }}>
+          <div className="cards" style={{ marginTop: 14 }}>
             {related.map((s) => (
               <SkillCard key={s.id} skill={s} />
             ))}
@@ -185,19 +176,47 @@ export default async function SkillPage({ params }: { params: { skillId: string 
   );
 }
 
-function Tree({ node, toSorted }: { node: FileTreeNode; toSorted: (n: FileTreeNode) => FileTreeNode[] }) {
+function countFiles(node: FileTreeNode): number {
+  if (node.isFile) return 1;
+  let total = 0;
+  for (const child of node.children.values()) total += countFiles(child);
+  return total;
+}
+
+function Tree({
+  node,
+  toSorted,
+  depth
+}: {
+  node: FileTreeNode;
+  toSorted: (n: FileTreeNode) => FileTreeNode[];
+  depth: number;
+}) {
   const children = toSorted(node);
   if (children.length === 0) return null;
   return (
-    <ul style={{ margin: 0, paddingLeft: 18, fontFamily: '"JetBrains Mono", ui-monospace', fontSize: 13, lineHeight: 1.6 }}>
-      {children.map((c) => (
-        <li key={c.path}>
-          <span style={{ color: c.isFile ? "rgba(11, 11, 16, 0.85)" : "rgba(11, 11, 16, 0.72)" }}>
-            {c.isFile ? c.name : `${c.name}/`}
-          </span>
-          {!c.isFile ? <Tree node={c} toSorted={toSorted} /> : null}
-        </li>
-      ))}
+    <ul>
+      {children.map((c) => {
+        if (c.isFile) {
+          return (
+            <li key={c.path}>
+              <span className="fileTreeFile">{c.name}</span>
+            </li>
+          );
+        }
+
+        return (
+          <li key={c.path}>
+            <details open={depth < 1}>
+              <summary>
+                <span className="fileTreeDir">{c.name}/</span>
+                <span className="fileTreeMeta">{countFiles(c)} files</span>
+              </summary>
+              <Tree node={c} toSorted={toSorted} depth={depth + 1} />
+            </details>
+          </li>
+        );
+      })}
     </ul>
   );
 }

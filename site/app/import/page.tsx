@@ -162,7 +162,7 @@ export default function ImportPage() {
     void run();
   }, []);
 
-  const categoryOptions = categories?.categories ?? [];
+  const categoryOptions = useMemo(() => categories?.categories ?? [], [categories]);
   const subcategoryOptions = useMemo(() => {
     const cat = categoryOptions.find((c) => c.id === targetCategory);
     return cat?.subcategories ?? [];
@@ -277,7 +277,7 @@ export default function ImportPage() {
           GitHub Action.
         </p>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 240px", gap: 12, marginTop: 14 }}>
+        <div className="formGrid" style={{ marginTop: 14 }}>
           <div>
             <label style={{ display: "block", fontWeight: 700, letterSpacing: "-0.01em" }}>Source repo</label>
             <input
@@ -331,7 +331,7 @@ export default function ImportPage() {
             </span>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginTop: 14 }}>
+          <div className="formGrid two" style={{ marginTop: 14 }}>
             <div>
               <label style={{ display: "block", fontWeight: 700, letterSpacing: "-0.01em" }}>Target category</label>
               <select className="input" value={targetCategory} onChange={(e) => setTargetCategory(e.target.value)} style={{ marginTop: 8 }}>

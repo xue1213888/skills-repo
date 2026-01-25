@@ -4,28 +4,15 @@ import { REPO_URL, SITE_NAME } from "@/lib/config";
 
 export function Header() {
   return (
-    <header
-      className="card"
-      style={{
-        margin: "18px auto 0",
-        maxWidth: 1120,
-        padding: "14px 16px"
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 14
-        }}
-      >
-        <Link href="/" style={{ display: "flex", alignItems: "baseline", gap: 12 }}>
-          <span style={{ fontWeight: 800, letterSpacing: "-0.02em" }}>{SITE_NAME}</span>
-          <span className="chip">community</span>
+    <header className="siteHeader">
+      <div className="container headerInner">
+        <Link href="/" className="brand" aria-label={`${SITE_NAME} home`}>
+          <span className="brandMark" aria-hidden="true" />
+          <span className="brandName">{SITE_NAME}</span>
+          <span className="chip">registry</span>
         </Link>
 
-        <nav style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <nav className="nav" aria-label="Primary">
           <Link className="btn" href="/categories">
             Categories
           </Link>
@@ -42,4 +29,3 @@ export function Header() {
     </header>
   );
 }
-

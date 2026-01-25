@@ -16,3 +16,7 @@ site/public/robots.txt
 # macOS
 .DS_Store
 
+# Python
+__pycache__/
+*.pyc
+*.pyo

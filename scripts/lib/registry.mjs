@@ -118,7 +118,17 @@ export async function listSkillFiles(skillDir) {
     cwd: skillDir,
     onlyFiles: true,
     dot: false,
-    ignore: ["**/.git/**", "**/node_modules/**", "**/.next/**", "**/dist/**", "**/out/**"]
+    ignore: [
+      "**/.git/**",
+      "**/node_modules/**",
+      "**/.next/**",
+      "**/dist/**",
+      "**/out/**",
+      "**/__pycache__/**",
+      "**/*.pyc",
+      "**/*.pyo",
+      "**/.DS_Store"
+    ]
   });
   entries.sort((a, b) => a.localeCompare(b));
   return entries.map((p) => ({ path: p, kind: "file" }));
