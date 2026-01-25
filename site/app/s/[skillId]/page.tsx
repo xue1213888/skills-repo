@@ -324,151 +324,149 @@ export default async function SkillPage({ params }: { params: { skillId: string 
   const sourceCommit = skill.source?.commit ?? "";
 
   return (
-    <div className="grid" style={{ gap: 16 }}>
-      <section className="card" style={{ padding: 18 }}>
-        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
-          <div style={{ minWidth: 260, flex: "1 1 520px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
-              <h1 style={{ margin: 0, fontSize: 30, letterSpacing: "-0.02em" }}>{skill.title}</h1>
-              <span className="chip">
-                {skill.category}/{skill.subcategory}
-              </span>
-            </div>
-            <p className="muted" style={{ margin: "10px 0 0", fontSize: 16, lineHeight: 1.55 }}>
-              {skill.description}
-            </p>
-
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 14 }}>
-              {(skill.tags ?? []).map((t) => (
-                <span key={t} className="chip">
-                  #{t}
+    <div className="skillDetailLayout">
+      <div className="skillMain">
+        <section className="card" style={{ padding: 18 }}>
+          <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+            <div style={{ minWidth: 260, flex: "1 1 520px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+                <h1 style={{ margin: 0, fontSize: 30, letterSpacing: "-0.02em" }}>{skill.title}</h1>
+                <span className="chip">
+                  {skill.category}/{skill.subcategory}
                 </span>
-              ))}
-            </div>
-          </div>
-
-          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
-            <Link className="btn" href={`/c/${skill.category}/${skill.subcategory}`}>
-              Back to list
-            </Link>
-            {sourceRepo ? (
-              <a className="btn primary" href={sourceRepo} target="_blank" rel="noreferrer">
-                Source repo
-              </a>
-            ) : null}
-          </div>
-        </div>
-      </section>
-
-      <div className="skillDetailLayout">
-        <div className="skillMain">
-          <section className="card" style={{ padding: 18 }}>
-            <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
-              <h2 style={{ margin: 0, fontSize: 18 }}>Files</h2>
-              <span className="chip">{filePaths.length} files</span>
-            </div>
-            <p className="muted" style={{ margin: "8px 0 0", lineHeight: 1.6 }}>
-              Expand to preview CSV and code files. Default collapsed for scanability.
-            </p>
-            <div className="fileTree" style={{ marginTop: 12 }}>
-              <Tree node={tree.root} toSorted={tree.toSorted} fileMeta={fileMeta} />
-            </div>
-          </section>
-
-          <section className="card" style={{ padding: 18 }} id="instructions">
-            <h2 style={{ margin: 0, fontSize: 18 }}>Instructions</h2>
-            <div style={{ height: 10 }} />
-            <article className="markdown">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
-            </article>
-          </section>
-        </div>
-
-        <aside className="skillAside">
-          <section className="card strong" style={{ padding: 16 }}>
-            <h2 style={{ margin: 0, fontSize: 16 }}>Quick install</h2>
-            <p className="muted" style={{ margin: "8px 0 0", lineHeight: 1.6 }}>
-              Install this skill into a target agent environment.
-            </p>
-            <div style={{ height: 12 }} />
-            <QuickInstallClient skillId={skill.id} declaredAgents={skill.agents} />
-          </section>
-
-          <section className="card strong" style={{ padding: 16 }}>
-            <h2 style={{ margin: 0, fontSize: 16 }}>Metadata</h2>
-            <div style={{ height: 12 }} />
-
-            <div className="metaDl">
-              <div className="metaRow">
-                <span className="metaKey">id</span>
-                <span className="metaVal">{skill.id}</span>
               </div>
-              <div className="metaRow">
-                <span className="metaKey">path</span>
-                <span className="metaVal">{skill.repoPath}</span>
-              </div>
-              {skill.license ? (
-                <div className="metaRow">
-                  <span className="metaKey">license</span>
-                  <span className="metaVal">{skill.license}</span>
-                </div>
-              ) : null}
-              {(skill.runtime ?? []).length > 0 ? (
-                <div className="metaRow">
-                  <span className="metaKey">runtime</span>
-                  <span className="metaVal">{(skill.runtime ?? []).join(", ")}</span>
-                </div>
-              ) : null}
-              {(skill.agents ?? []).length > 0 ? (
-                <div className="metaRow">
-                  <span className="metaKey">agents</span>
-                  <span className="metaVal">{(skill.agents ?? []).join(", ")}</span>
-                </div>
-              ) : null}
-              {sourceRepo ? (
-                <div className="metaRow">
-                  <span className="metaKey">source</span>
-                  <a className="metaVal" href={sourceRepo} target="_blank" rel="noreferrer" style={{ textDecoration: "underline" }}>
-                    {stripHttps(sourceRepo)}
-                  </a>
-                </div>
-              ) : null}
-              {sourcePath ? (
-                <div className="metaRow">
-                  <span className="metaKey">sourcePath</span>
-                  <span className="metaVal">{sourcePath}</span>
-                </div>
-              ) : null}
-              {sourceRef ? (
-                <div className="metaRow">
-                  <span className="metaKey">ref</span>
-                  <span className="metaVal">{sourceRef}</span>
-                </div>
-              ) : null}
-              {sourceCommit ? (
-                <div className="metaRow">
-                  <span className="metaKey">commit</span>
-                  <span className="metaVal">{sourceCommit.slice(0, 10)}</span>
-                </div>
-              ) : null}
-            </div>
-          </section>
-
-          {related.length > 0 ? (
-            <section className="card strong" style={{ padding: 16 }}>
-              <h2 style={{ margin: 0, fontSize: 16 }}>Related</h2>
-              <p className="muted" style={{ margin: "8px 0 0", lineHeight: 1.6 }}>
-                Similar category + overlapping tags.
+              <p className="muted" style={{ margin: "10px 0 0", fontSize: 16, lineHeight: 1.55 }}>
+                {skill.description}
               </p>
-              <div className="grid" style={{ marginTop: 12 }}>
-                {related.map((s) => (
-                  <SkillMiniCard key={s.id} skill={s} />
+
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 14 }}>
+                {(skill.tags ?? []).map((t) => (
+                  <span key={t} className="chip">
+                    #{t}
+                  </span>
                 ))}
               </div>
-            </section>
-          ) : null}
-        </aside>
+            </div>
+
+            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+              <Link className="btn" href={`/c/${skill.category}/${skill.subcategory}`}>
+                Back to list
+              </Link>
+              {sourceRepo ? (
+                <a className="btn primary" href={sourceRepo} target="_blank" rel="noreferrer">
+                  Source repo
+                </a>
+              ) : null}
+            </div>
+          </div>
+        </section>
+
+        <section className="card" style={{ padding: 18 }}>
+          <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+            <h2 style={{ margin: 0, fontSize: 18 }}>Files</h2>
+            <span className="chip">{filePaths.length} files</span>
+          </div>
+          <p className="muted" style={{ margin: "8px 0 0", lineHeight: 1.6 }}>
+            Expand to preview CSV and code files. Default collapsed for scanability.
+          </p>
+          <div className="fileTree" style={{ marginTop: 12 }}>
+            <Tree node={tree.root} toSorted={tree.toSorted} fileMeta={fileMeta} />
+          </div>
+        </section>
+
+        <section className="card" style={{ padding: 18 }} id="instructions">
+          <h2 style={{ margin: 0, fontSize: 18 }}>Instructions</h2>
+          <div style={{ height: 10 }} />
+          <article className="markdown">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
+          </article>
+        </section>
       </div>
+
+      <aside className="skillAside">
+        <section className="card strong" style={{ padding: 16 }}>
+          <h2 style={{ margin: 0, fontSize: 16 }}>Quick install</h2>
+          <p className="muted" style={{ margin: "8px 0 0", lineHeight: 1.6 }}>
+            Install this skill into a target agent environment.
+          </p>
+          <div style={{ height: 12 }} />
+          <QuickInstallClient skillId={skill.id} declaredAgents={skill.agents} />
+        </section>
+
+        <section className="card strong" style={{ padding: 16 }}>
+          <h2 style={{ margin: 0, fontSize: 16 }}>Metadata</h2>
+          <div style={{ height: 12 }} />
+
+          <div className="metaDl">
+            <div className="metaRow">
+              <span className="metaKey">id</span>
+              <span className="metaVal">{skill.id}</span>
+            </div>
+            <div className="metaRow">
+              <span className="metaKey">path</span>
+              <span className="metaVal">{skill.repoPath}</span>
+            </div>
+            {skill.license ? (
+              <div className="metaRow">
+                <span className="metaKey">license</span>
+                <span className="metaVal">{skill.license}</span>
+              </div>
+            ) : null}
+            {(skill.runtime ?? []).length > 0 ? (
+              <div className="metaRow">
+                <span className="metaKey">runtime</span>
+                <span className="metaVal">{(skill.runtime ?? []).join(", ")}</span>
+              </div>
+            ) : null}
+            {(skill.agents ?? []).length > 0 ? (
+              <div className="metaRow">
+                <span className="metaKey">agents</span>
+                <span className="metaVal">{(skill.agents ?? []).join(", ")}</span>
+              </div>
+            ) : null}
+            {sourceRepo ? (
+              <div className="metaRow">
+                <span className="metaKey">source</span>
+                <a className="metaVal" href={sourceRepo} target="_blank" rel="noreferrer" style={{ textDecoration: "underline" }}>
+                  {stripHttps(sourceRepo)}
+                </a>
+              </div>
+            ) : null}
+            {sourcePath ? (
+              <div className="metaRow">
+                <span className="metaKey">sourcePath</span>
+                <span className="metaVal">{sourcePath}</span>
+              </div>
+            ) : null}
+            {sourceRef ? (
+              <div className="metaRow">
+                <span className="metaKey">ref</span>
+                <span className="metaVal">{sourceRef}</span>
+              </div>
+            ) : null}
+            {sourceCommit ? (
+              <div className="metaRow">
+                <span className="metaKey">commit</span>
+                <span className="metaVal">{sourceCommit.slice(0, 10)}</span>
+              </div>
+            ) : null}
+          </div>
+        </section>
+
+        {related.length > 0 ? (
+          <section className="card strong" style={{ padding: 16 }}>
+            <h2 style={{ margin: 0, fontSize: 16 }}>Related</h2>
+            <p className="muted" style={{ margin: "8px 0 0", lineHeight: 1.6 }}>
+              Similar category + overlapping tags.
+            </p>
+            <div className="grid" style={{ marginTop: 12 }}>
+              {related.map((s) => (
+                <SkillMiniCard key={s.id} skill={s} />
+              ))}
+            </div>
+          </section>
+        ) : null}
+      </aside>
     </div>
   );
 }
