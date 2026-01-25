@@ -391,6 +391,36 @@ a {
   color: rgba(15, 23, 42, 0.72);
 }
 
+.markdownTableWrap {
+  overflow: auto;
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.markdownTableWrap table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.markdownTableWrap th,
+.markdownTableWrap td {
+  padding: 8px 10px;
+  border-top: 1px solid rgba(15, 23, 42, 0.1);
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+.markdownTableWrap th {
+  position: sticky;
+  top: 0;
+  background: rgba(248, 250, 252, 0.96);
+  border-top: none;
+  z-index: 1;
+}
+
 .fileTree {
   border: 1px solid rgba(15, 23, 42, 0.14);
   border-radius: 14px;
@@ -443,6 +473,7 @@ a {
   gap: 10px;
   padding: 6px 8px;
   border-radius: 10px;
+  min-width: 0;
 }
 
 .fileTree summary:hover {
@@ -451,17 +482,26 @@ a {
 
 .fileTreeFile {
   color: rgba(15, 23, 42, 0.88);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .fileTreeDir {
   color: rgba(15, 23, 42, 0.76);
   font-weight: 650;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .fileTreeMeta {
   margin-left: auto;
   color: rgba(15, 23, 42, 0.55);
   font-size: 12px;
+  flex: 0 0 auto;
 }
 
 .filePreview {
@@ -534,9 +574,10 @@ a {
 
 .skillDetailLayout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  /* Keep both columns visually "together" and prevent the helper rail from feeling oversized. */
+  grid-template-columns: minmax(0, 1fr) clamp(260px, 28vw, 320px);
   grid-template-areas: "main aside";
-  gap: 16px;
+  gap: 20px;
   align-items: start;
 }
 
@@ -668,5 +709,15 @@ a {
   .skillAside {
     position: static;
     overflow: visible;
+  }
+}
+
+@media (min-width: 981px) {
+  .skillAside {
+    /* Avoid the sidebar becoming "infinitely tall" and feeling detached from the main content. */
+    position: sticky;
+    top: 92px;
+    max-height: calc(100vh - 92px - 24px);
+    overflow: auto;
   }
 }

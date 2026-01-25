@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
+import type { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 import { SkillMiniCard } from "@/components/SkillMiniCard";
@@ -18,6 +19,17 @@ const FILE_PREVIEW_MAX_BYTES = 80 * 1024;
 const FILE_PREVIEW_MAX_CODE_LINES = 220;
 const CSV_PREVIEW_MAX_ROWS = 28;
 const CSV_PREVIEW_MAX_COLS = 12;
+
+const MARKDOWN_COMPONENTS: Components = {
+  table({ node, ...props }) {
+    void node;
+    return (
+      <div className="markdownTableWrap">
+        <table {...props} />
+      </div>
+    );
+  }
+};
 
 type FileTreeNode = {
   name: string;
@@ -378,7 +390,9 @@ export default async function SkillPage({ params }: { params: { skillId: string 
           <h2 style={{ margin: 0, fontSize: 18 }}>Instructions</h2>
           <div style={{ height: 10 }} />
           <article className="markdown">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
+            <ReactMarkdown remarkPlugins={[remarkGfm]} components={MARKDOWN_COMPONENTS}>
+              {markdown}
+            </ReactMarkdown>
           </article>
         </section>
       </div>
@@ -562,7 +576,9 @@ function Tree({
                 {preview?.kind === "markdown" ? (
                   <div className="grid" style={{ gap: 10 }}>
                     <article className="markdown">
-                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{preview.text}</ReactMarkdown>
+                      <ReactMarkdown remarkPlugins={[remarkGfm]} components={MARKDOWN_COMPONENTS}>
+                        {preview.text}
+                      </ReactMarkdown>
                     </article>
                     {preview.truncated ? (
                       <p className="muted" style={{ margin: 0, lineHeight: 1.6 }}>
