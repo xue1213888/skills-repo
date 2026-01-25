@@ -341,8 +341,8 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(260px,320px)] gap-5 items-start">
       {/* Main content area */}
-      <div className="min-w-0 grid gap-4 order-2 lg:order-1">
-        <section className="bg-surface border border-black/12 rounded-[16px] shadow-[0_1px_0_rgba(15,23,42,0.06)] p-[18px]">
+      <div className="min-w-0 grid gap-4 order-2 lg:order-1 overflow-hidden">
+        <section className="bg-surface border border-black/12 rounded-[16px] shadow-[0_1px_0_rgba(15,23,42,0.06)] p-[18px] overflow-hidden">
           <div className="flex items-start justify-between gap-3 flex-wrap">
             <div className="min-w-[260px] flex-[1_1_520px]">
               <div className="flex items-center gap-2.5 flex-wrap">
@@ -388,7 +388,7 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
           </div>
         </section>
 
-        <section className="bg-surface border border-black/12 rounded-[16px] shadow-[0_1px_0_rgba(15,23,42,0.06)] p-[18px]">
+        <section className="bg-surface border border-black/12 rounded-[16px] shadow-[0_1px_0_rgba(15,23,42,0.06)] p-[18px] overflow-hidden">
           <div className="flex items-baseline justify-between gap-3 flex-wrap">
             <h2 className="m-0 text-lg">Files</h2>
             <span className="inline-flex items-center gap-2 rounded-full border border-border px-2.5 py-1.5 font-mono text-xs text-muted bg-white/55">
@@ -398,15 +398,15 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
           <p className="text-muted mt-2 leading-relaxed">
             Expand to preview CSV and code files. Default collapsed for scanability.
           </p>
-          <div className="border border-border rounded-[14px] p-3 bg-white/60 font-mono text-[13px] leading-relaxed mt-3">
+          <div className="border border-border rounded-[14px] p-3 bg-white/60 font-mono text-[13px] leading-relaxed mt-3 overflow-x-auto">
             <Tree node={tree.root} toSorted={tree.toSorted} fileMeta={fileMeta} />
           </div>
         </section>
 
-        <section className="bg-surface border border-black/12 rounded-[16px] shadow-[0_1px_0_rgba(15,23,42,0.06)] p-[18px]" id="instructions">
+        <section className="bg-surface border border-black/12 rounded-[16px] shadow-[0_1px_0_rgba(15,23,42,0.06)] p-[18px] overflow-hidden" id="instructions">
           <h2 className="m-0 text-lg">Instructions</h2>
           <div className="h-2.5" />
-          <article className="markdown">
+          <article className="markdown min-w-0 overflow-x-auto">
             <ReactMarkdown remarkPlugins={[remarkGfm]} components={MARKDOWN_COMPONENTS}>
               {markdown}
             </ReactMarkdown>
