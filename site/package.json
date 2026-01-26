@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "cd .. && npm run build:registry",
     "build": "next build",
     "lint": "next lint"
   },

@@ -61,21 +61,27 @@ Note: `.codex/` is currently a legacy folder used by local tooling; the canonica
 From repo root:
 
 ```bash
-# install tooling deps
+# Install tooling deps
 npm install
 
-# validate + build generated registry JSON into `registry/` and `site/public/registry/`
+# Validate skills and build registry
 npm run validate
 npm run build:registry
 
-# configure site environment variables
+# Configure site environment variables
 cd site
 cp .env.example .env.local
 # Edit .env.local and set NEXT_PUBLIC_REPO_SLUG to your GitHub username/repo
-
-# run the Next.js site
 npm install
-npm run dev
+cd ..
+
+# Run the site (automatically rebuilds registry first)
+npm run dev:site
+
+# Or build the site for production
+npm run build:site
 ```
 
 The site will be available at http://localhost:3000
+
+**Note**: When you add or modify skills, run `npm run build:registry` to update the registry files, then commit them to Git.

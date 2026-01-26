@@ -64,15 +64,25 @@ const DEFAULT_REGISTRY_URL = "https://github.com/your-username/your-repo-name";
 ### 4. Build and Deploy
 
 ```bash
-# Build the registry
+# Build the registry (IMPORTANT: This must be committed to Git)
 npm run validate
 npm run build:registry
+
+# Commit the registry files (required for CLI tool)
+git add registry/*.json
+git commit -m "chore: update registry"
+git push
 
 # Build the site
 cd site
 npm install
 npm run build
 ```
+
+**Important**: The registry JSON files in `registry/` directory **must be committed to Git** because:
+- The CLI tool (`npx github:xxx`) downloads code from GitHub and reads these files
+- The website build process also uses these files
+- They are generated but essential for distribution
 
 ## How It Works
 

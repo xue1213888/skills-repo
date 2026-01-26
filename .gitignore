@@ -7,8 +7,7 @@ site/node_modules/
 site/.next/
 site/out/
 
-# Generated registry artifacts
-registry/*.json
+# Generated site artifacts (can be regenerated)
 site/public/registry/*.json
 site/public/sitemap.xml
 site/public/robots.txt
