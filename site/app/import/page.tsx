@@ -167,7 +167,6 @@ function extractTitleFromMarkdown(content: string): string | undefined {
 function buildIssueBody(args: {
   sourceRepoUrl: string;
   ref: string;
-  reviewUrl: string;
   items: Array<{
     sourcePath: string;
     id: string;
@@ -237,10 +236,6 @@ function buildIssueBody(args: {
     sections.push("");
   }
 
-  sections.push(`## Review`);
-  sections.push("");
-  sections.push(`[Preview imported skills](${args.reviewUrl})`);
-  sections.push("");
   sections.push(block);
   sections.push("");
 
@@ -458,12 +453,11 @@ export default function ImportPage() {
     const body = buildIssueBody({
       sourceRepoUrl,
       ref: resolvedRef,
-      reviewUrl,
       items: reviewData.items
     });
 
     return `https://github.com/${REPO_SLUG}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
-  }, [sourceRepoUrl, resolvedRef, reviewData, reviewUrl]);
+  }, [sourceRepoUrl, resolvedRef, reviewData]);
 
   async function onParse() {
     setError(null);
@@ -982,6 +976,20 @@ export default function ImportPage() {
           </div>
 
           <div className="flex gap-3 flex-wrap mt-5 items-center">
+            {reviewUrl && (
+              <a
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-background-secondary border border-border text-foreground font-medium hover:bg-card transition-colors"
+                href={reviewUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+                Preview
+              </a>
+            )}
             <a
               className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-accent text-white font-medium transition-colors ${
                 !issueUrl ? "opacity-50 cursor-not-allowed" : "hover:bg-accent-hover"
