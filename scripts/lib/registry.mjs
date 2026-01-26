@@ -232,6 +232,7 @@ export async function scanSkills({ includeFiles = true, includeSummary = true } 
 export async function loadCategoriesFromRepo(skills) {
   let categories = new Map(); // id -> {id,title,description,subcategories: Map}
 
+  // First, populate from existing skills
   for (let s of skills) {
     if (!categories.has(s.category)) {
       categories.set(s.category, {
@@ -251,7 +252,49 @@ export async function loadCategoriesFromRepo(skills) {
     }
   }
 
-  // Optional overrides from _category.yaml files.
+  // Second, scan for all _category.yaml files to include empty categories
+  const categoryFiles = await fg(["skills/*/_category.yaml"], { onlyFiles: true, dot: false });
+  for (let categoryPath of categoryFiles) {
+    const parts = categoryPath.split("/");
+    const catId = parts[1]; // skills/category-id/_category.yaml
+
+    if (!categories.has(catId)) {
+      categories.set(catId, {
+        id: catId,
+        title: humanizeSlug(catId),
+        description: "",
+        subcategories: new Map()
+      });
+    }
+  }
+
+  // Third, scan for all subcategory _category.yaml files
+  const subcategoryFiles = await fg(["skills/*/*/_category.yaml"], { onlyFiles: true, dot: false });
+  for (let subcatPath of subcategoryFiles) {
+    const parts = subcatPath.split("/");
+    const catId = parts[1]; // skills/category-id/subcategory-id/_category.yaml
+    const subId = parts[2];
+
+    if (!categories.has(catId)) {
+      categories.set(catId, {
+        id: catId,
+        title: humanizeSlug(catId),
+        description: "",
+        subcategories: new Map()
+      });
+    }
+
+    const cat = categories.get(catId);
+    if (!cat.subcategories.has(subId)) {
+      cat.subcategories.set(subId, {
+        id: subId,
+        title: humanizeSlug(subId),
+        description: ""
+      });
+    }
+  }
+
+  // Apply overrides from _category.yaml files.
   for (let [catId, cat] of categories) {
     let catMetaPath = `skills/${catId}/_category.yaml`;
     if (await fileExists(catMetaPath)) {
