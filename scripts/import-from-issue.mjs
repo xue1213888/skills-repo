@@ -64,8 +64,7 @@ function extractDescriptionFromMarkdown(content) {
   }
 
   const text = para.join(" ").trim();
-  // Truncate to 500 chars (schema limit)
-  return text.length > 500 ? text.slice(0, 497) + "..." : text;
+  return text;
 }
 
 function run(cmd, args, opts = {}) {
