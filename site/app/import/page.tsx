@@ -177,23 +177,23 @@ function buildIssueBody(args: {
     isUpdate: boolean;
   }>;
 }) {
-  const newItems = args.items.filter((it) => !it.isUpdate);
-  const updateItems = args.items.filter((it) => it.isUpdate);
+  const newCount = args.items.filter((it) => !it.isUpdate).length;
+  const updateCount = args.items.filter((it) => it.isUpdate).length;
 
+  // Build compact YAML - only essential fields
   const itemLines = args.items.map((it) => {
     const lines = [
       `  - sourcePath: ${it.sourcePath}`,
       `    id: ${it.id}`,
-      `    title: "${it.title.replace(/"/g, '\\"')}"`,
+      `    title: ${it.title}`,
       `    targetCategory: ${it.targetCategory}`,
       `    targetSubcategory: ${it.targetSubcategory}`,
-      `    isUpdate: ${it.isUpdate}`,
     ];
+    if (it.isUpdate) {
+      lines.push(`    isUpdate: true`);
+    }
     if (it.tags.length > 0) {
-      lines.push(`    tags:`);
-      for (const tag of it.tags) {
-        lines.push(`      - ${tag}`);
-      }
+      lines.push(`    tags: [${it.tags.join(", ")}]`);
     }
     return lines.join("\n");
   });
@@ -207,39 +207,16 @@ function buildIssueBody(args: {
     "-->"
   ].join("\n");
 
-  const sections: string[] = [
-    "Importer request (created from the static site UI).",
+  // Minimal summary - details are in the YAML block
+  const summary = [
+    `Import ${args.items.length} skill(s): ${newCount} new, ${updateCount} update.`,
     "",
-    "Maintainers: add label `import-approved` to trigger the import PR workflow.",
+    "Add label `import-approved` to trigger the import workflow.",
     "",
-  ];
+    block,
+  ].join("\n");
 
-  if (newItems.length > 0) {
-    sections.push(`## New Skills (${newItems.length})`);
-    sections.push("");
-    sections.push(...newItems.map((it) => {
-      let line = `- **${it.title}** (\`${it.id}\`) → \`${it.targetCategory}/${it.targetSubcategory}\``;
-      if (it.tags.length > 0) line += ` [${it.tags.join(", ")}]`;
-      return line;
-    }));
-    sections.push("");
-  }
-
-  if (updateItems.length > 0) {
-    sections.push(`## Update Skills (${updateItems.length})`);
-    sections.push("");
-    sections.push(...updateItems.map((it) => {
-      let line = `- **${it.title}** (\`${it.id}\`) → \`${it.targetCategory}/${it.targetSubcategory}\``;
-      if (it.tags.length > 0) line += ` [${it.tags.join(", ")}]`;
-      return line;
-    }));
-    sections.push("");
-  }
-
-  sections.push(block);
-  sections.push("");
-
-  return sections.join("\n");
+  return summary;
 }
 
 export default function ImportPage() {
