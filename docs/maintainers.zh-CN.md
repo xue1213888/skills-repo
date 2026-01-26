@@ -24,6 +24,10 @@
 - CLI 会通过 GitHub raw URL 拉取 `registry/index.json`
 - 静态站点构建也依赖 registry 输出
 
+CI 强制：
+
+- `npm run check:registry` 会在 PR 中校验 `registry/*.json` 是否最新（过期会直接失败）。
+
 ## Importer 运营
 
 1. 确保仓库存在 label：`import-approved`
@@ -58,4 +62,3 @@ npx aiskill list
 
 - `site/.env.local`
 - 安装产物目录：`./.claude/skills/`、`./.codex/skills/` 等
-

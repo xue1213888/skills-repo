@@ -1,7 +1,25 @@
 {
   "specVersion": 1,
-  "generatedAt": "2026-01-26T10:21:46.587Z",
+  "generatedAt": "2026-01-26T10:50:26.784Z",
   "docs": [
+    {
+      "id": "react-best-practices",
+      "category": "business",
+      "subcategory": "finance",
+      "title": "Vercel React Best Practices",
+      "tags": [],
+      "agents": [],
+      "text": "Vercel React Best Practices\nReact and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.\nComprehensive performance optimization guide for React and Next.js applications, maintained by Vercel. Contains 57 rules across 8 categories, prioritized by impact to guide automated refactoring and code generation."
+    },
+    {
+      "id": "web-design-guidelines",
+      "category": "business",
+      "subcategory": "finance",
+      "title": "Web Interface Guidelines",
+      "tags": [],
+      "agents": [],
+      "text": "Web Interface Guidelines\nReview UI code for Web Interface Guidelines compliance. Use when asked to \"review my UI\", \"check accessibility\", \"audit design\", \"review UX\", or \"check my site against best practices\".\nReview files for compliance with Web Interface Guidelines."
+    },
     {
       "id": "skill-creator",
       "category": "data-ai",
@@ -64,6 +82,17 @@
       "tags": [],
       "agents": [],
       "text": "internal-comms\nA set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).\nTo write internal communications, use this skill for:\n- 3P updates (Progress, Plans, Problems)\n- Company newsletters\n- FAQ responses\n- Status reports\n- Leadership updates\n- Project updates\n- Incident reports"
+    },
+    {
+      "id": "vercel-deploy-claimable",
+      "category": "development",
+      "subcategory": "backend",
+      "title": "Vercel Deploy",
+      "tags": [
+        "test123"
+      ],
+      "agents": [],
+      "text": "Vercel Deploy\nDeploy applications and websites to Vercel. Use this skill when the user requests deployment actions such as \"Deploy my app\", \"Deploy this to production\", \"Create a preview deployment\", \"Deploy and give me the link\", or \"Push this live\". No authentication required - returns preview URL and claimable deployment link.\ntest123\nDeploy any project to Vercel instantly. No authentication required."
     },
     {
       "id": "webapp-testing",

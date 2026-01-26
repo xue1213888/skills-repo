@@ -25,6 +25,9 @@ jobs:
       - name: Validate skills
         run: npm run validate
 
+      - name: Check registry files are up to date
+        run: npm run check:registry
+
       - name: Build registry artifacts
         run: npm run build:registry
 

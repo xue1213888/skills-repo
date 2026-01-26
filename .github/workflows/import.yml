@@ -37,6 +37,9 @@ jobs:
         id: validate
         run: npm run validate
 
+      - name: Build registry artifacts
+        run: npm run build:registry
+
       - name: Create pull request
         id: cpr
         uses: peter-evans/create-pull-request@v6

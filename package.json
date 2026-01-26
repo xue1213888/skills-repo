@@ -11,6 +11,7 @@
   },
   "scripts": {
     "validate": "node scripts/validate.mjs",
+    "check:registry": "node scripts/check-registry-up-to-date.mjs",
     "build:registry": "node scripts/build-registry.mjs",
     "build:site": "npm run build:registry && npm run build --prefix site",
     "dev:site": "npm run build:registry && npm run dev --prefix site"
@@ -30,4 +31,3 @@
     "yaml": "^2.7.0"
   }
 }
-

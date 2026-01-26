@@ -26,6 +26,10 @@ Why `registry/*.json` matters:
 - The CLI fetches `registry/index.json` from GitHub raw URLs
 - The static site uses the registry outputs at build time
 
+CI enforcement:
+
+- `npm run check:registry` fails PRs if `registry/*.json` are out of date.
+
 ## Importer Operations
 
 1. Confirm the `import-approved` label exists in the repo
@@ -60,4 +64,3 @@ Do not commit:
 
 - `site/.env.local`
 - installed skill copies under `./.claude/skills/`, `./.codex/skills/`, etc.
-

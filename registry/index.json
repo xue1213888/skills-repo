@@ -1,7 +1,305 @@
 {
   "specVersion": 1,
-  "generatedAt": "2026-01-26T10:21:46.587Z",
+  "generatedAt": "2026-01-26T10:50:26.784Z",
   "skills": [
+    {
+      "specVersion": 1,
+      "id": "react-best-practices",
+      "title": "Vercel React Best Practices",
+      "description": "React and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/vercel-labs/agent-skills",
+        "path": "skills/react-best-practices",
+        "ref": "main",
+        "commit": "c4399b192588e71fdf0cb507c7b6ad9e9657ce6b"
+      },
+      "category": "business",
+      "subcategory": "finance",
+      "repoPath": "skills/business/finance/react-best-practices",
+      "summary": "Comprehensive performance optimization guide for React and Next.js applications, maintained by Vercel. Contains 57 rules across 8 categories, prioritized by impact to guide automated refactoring and code generation.",
+      "files": [
+        {
+          "path": "AGENTS.md",
+          "kind": "file"
+        },
+        {
+          "path": "metadata.json",
+          "kind": "file"
+        },
+        {
+          "path": "README.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/_sections.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/_template.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/advanced-event-handler-refs.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/advanced-init-once.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/advanced-use-latest.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/async-api-routes.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/async-defer-await.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/async-dependencies.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/async-parallel.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/async-suspense-boundaries.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/bundle-barrel-imports.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/bundle-conditional.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/bundle-defer-third-party.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/bundle-dynamic-imports.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/bundle-preload.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/client-event-listeners.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/client-localstorage-schema.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/client-passive-event-listeners.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/client-swr-dedup.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/js-batch-dom-css.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/js-cache-function-results.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/js-cache-property-access.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/js-cache-storage.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/js-combine-iterations.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/js-early-exit.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/js-hoist-regexp.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/js-index-maps.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/js-length-check-first.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/js-min-max-loop.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/js-set-map-lookups.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/js-tosorted-immutable.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rendering-activity.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rendering-animate-svg-wrapper.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rendering-conditional-render.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rendering-content-visibility.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rendering-hoist-jsx.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rendering-hydration-no-flicker.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rendering-hydration-suppress-warning.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rendering-svg-precision.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rendering-usetransition-loading.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rerender-defer-reads.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rerender-dependencies.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rerender-derived-state-no-effect.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rerender-derived-state.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rerender-functional-setstate.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rerender-lazy-state-init.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rerender-memo-with-default-value.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rerender-memo.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rerender-move-effect-to-event.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rerender-simple-expression-in-memo.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rerender-transitions.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/rerender-use-ref-transient-values.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/server-after-nonblocking.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/server-auth-actions.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/server-cache-lru.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/server-cache-react.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/server-dedup-props.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/server-parallel-fetching.md",
+          "kind": "file"
+        },
+        {
+          "path": "rules/server-serialization.md",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "web-design-guidelines",
+      "title": "Web Interface Guidelines",
+      "description": "Review UI code for Web Interface Guidelines compliance. Use when asked to \"review my UI\", \"check accessibility\", \"audit design\", \"review UX\", or \"check my site against best practices\".",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/vercel-labs/agent-skills",
+        "path": "skills/web-design-guidelines",
+        "ref": "main",
+        "commit": "c4399b192588e71fdf0cb507c7b6ad9e9657ce6b"
+      },
+      "category": "business",
+      "subcategory": "finance",
+      "repoPath": "skills/business/finance/web-design-guidelines",
+      "summary": "Review files for compliance with Web Interface Guidelines.",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
     {
       "specVersion": 1,
       "id": "skill-creator",
@@ -617,6 +915,38 @@
         },
         {
           "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "vercel-deploy-claimable",
+      "title": "Vercel Deploy",
+      "description": "Deploy applications and websites to Vercel. Use this skill when the user requests deployment actions such as \"Deploy my app\", \"Deploy this to production\", \"Create a preview deployment\", \"Deploy and give me the link\", or \"Push this live\". No authentication required - returns preview URL and claimable deployment link.",
+      "tags": [
+        "test123"
+      ],
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/vercel-labs/agent-skills",
+        "path": "skills/claude.ai/vercel-deploy-claimable",
+        "ref": "main",
+        "commit": "c4399b192588e71fdf0cb507c7b6ad9e9657ce6b"
+      },
+      "category": "development",
+      "subcategory": "backend",
+      "repoPath": "skills/development/backend/vercel-deploy-claimable",
+      "summary": "Deploy any project to Vercel instantly. No authentication required.",
+      "files": [
+        {
+          "path": "scripts/deploy.sh",
           "kind": "file"
         },
         {
