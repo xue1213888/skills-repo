@@ -10,6 +10,7 @@ import remarkGfm from "remark-gfm";
 
 import { SkillMiniCard } from "@/components/SkillMiniCard";
 import { QuickInstallClient } from "@/components/QuickInstallClient";
+import { FileTreeClient } from "@/components/FileTreeClient";
 import { REPO_URL } from "@/lib/config";
 import { getSkillById, loadRegistryIndex } from "@/lib/registry";
 
@@ -34,7 +35,7 @@ const MARKDOWN_COMPONENTS: Components = {
 type FileTreeNode = {
   name: string;
   path: string;
-  children: Map<string, FileTreeNode>;
+  children: FileTreeNode[];
   isFile: boolean;
 };
 
@@ -78,12 +79,19 @@ export async function generateMetadata({
   };
 }
 
-function buildFileTree(paths: string[]) {
-  const root: FileTreeNode = { name: "", path: "", children: new Map(), isFile: false };
+function buildFileTree(paths: string[]): FileTreeNode[] {
+  type BuildNode = {
+    name: string;
+    path: string;
+    children: Map<string, BuildNode>;
+    isFile: boolean;
+  };
+
+  const root: BuildNode = { name: "", path: "", children: new Map(), isFile: false };
 
   for (const p of paths) {
     const parts = p.split("/").filter(Boolean);
-    let cur: FileTreeNode = root;
+    let cur: BuildNode = root;
     let acc = "";
     for (let i = 0; i < parts.length; i++) {
       const part = parts[i]!;
@@ -98,31 +106,23 @@ function buildFileTree(paths: string[]) {
     }
   }
 
-  const toSorted = (n: FileTreeNode): FileTreeNode[] => {
-    const dirs: FileTreeNode[] = [];
-    const files: FileTreeNode[] = [];
+  const toSorted = (n: BuildNode): FileTreeNode[] => {
+    const dirs: BuildNode[] = [];
+    const files: BuildNode[] = [];
     for (const child of n.children.values()) {
       (child.isFile ? files : dirs).push(child);
     }
     dirs.sort((a, b) => a.name.localeCompare(b.name));
     files.sort((a, b) => a.name.localeCompare(b.name));
-    return [...dirs, ...files];
+    return [...dirs, ...files].map((node) => ({
+      name: node.name,
+      path: node.path,
+      isFile: node.isFile,
+      children: toSorted(node)
+    }));
   };
 
-  return { root, toSorted };
-}
-
-function formatBytes(bytes: number) {
-  if (!Number.isFinite(bytes) || bytes <= 0) return "0 B";
-  const units = ["B", "KB", "MB", "GB"];
-  let v = bytes;
-  let i = 0;
-  while (v >= 1024 && i < units.length - 1) {
-    v /= 1024;
-    i++;
-  }
-  const num = i === 0 ? `${Math.round(v)}` : v.toFixed(v >= 10 ? 1 : 2);
-  return `${num} ${units[i]}`;
+  return toSorted(root);
 }
 
 function isProbablyBinary(buf: Buffer) {
@@ -216,13 +216,6 @@ function parseCsvPreview(input: string, maxRows: number, maxCols: number) {
   return { headers, rows: clippedBody, truncated };
 }
 
-function countFiles(node: FileTreeNode): number {
-  if (node.isFile) return 1;
-  let total = 0;
-  for (const child of node.children.values()) total += countFiles(child);
-  return total;
-}
-
 function stripHttps(url: string) {
   return url.replace(/^https?:\/\//, "");
 }
@@ -249,7 +242,7 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
   const tree = buildFileTree(filePaths);
 
   const skillDir = path.resolve(process.cwd(), "..", skill.repoPath);
-  const fileMeta = new Map<string, FileMeta>();
+  const fileMetaList: FileMeta[] = [];
 
   for (const p of filePaths) {
     const name = p.split("/").pop() ?? p;
@@ -262,25 +255,25 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
       const st = await fs.stat(absPath);
       size = st.size;
     } catch {
-      fileMeta.set(p, {
+      fileMetaList.push({
         path: p,
         name,
         ext,
         size: 0,
         githubUrl,
-        preview: { kind: "skip", reason: "Missing file on disk (unexpected during static build)." }
+        preview: { kind: "skip", reason: "Missing file on disk." }
       });
       continue;
     }
 
     if (p === "SKILL.md") {
-      fileMeta.set(p, { path: p, name, ext, size, githubUrl, preview: { kind: "skip", reason: "Rendered below." } });
+      fileMetaList.push({ path: p, name, ext, size, githubUrl, preview: { kind: "skip", reason: "Rendered below." } });
       continue;
     }
 
     const buf = await readFileSnippet(absPath, FILE_PREVIEW_MAX_BYTES);
     if (isProbablyBinary(buf)) {
-      fileMeta.set(p, {
+      fileMetaList.push({
         path: p,
         name,
         ext,
@@ -296,7 +289,7 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
 
     if (ext === ".csv") {
       const parsed = parseCsvPreview(text, CSV_PREVIEW_MAX_ROWS, CSV_PREVIEW_MAX_COLS);
-      fileMeta.set(p, {
+      fileMetaList.push({
         path: p,
         name,
         ext,
@@ -310,7 +303,7 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
     if (ext === ".md") {
       const lines = text.split(/\r?\n/);
       const clipped = lines.slice(0, FILE_PREVIEW_MAX_CODE_LINES).join("\n");
-      fileMeta.set(p, {
+      fileMetaList.push({
         path: p,
         name,
         ext,
@@ -323,7 +316,7 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
 
     const lines = text.split(/\r?\n/);
     const clipped = lines.slice(0, FILE_PREVIEW_MAX_CODE_LINES).join("\n");
-    fileMeta.set(p, {
+    fileMetaList.push({
       path: p,
       name,
       ext,
@@ -406,10 +399,10 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
             </span>
           </div>
           <p className="text-secondary mt-2">
-            Expand to preview CSV and code files.
+            Click on a file to preview its contents.
           </p>
-          <div className="mt-4 p-4 rounded-lg bg-background-secondary border border-border font-mono text-sm overflow-x-auto">
-            <Tree node={tree.root} toSorted={tree.toSorted} fileMeta={fileMeta} />
+          <div className="mt-4 p-4 rounded-lg bg-background-secondary border border-border overflow-x-auto">
+            <FileTreeClient tree={tree} fileMeta={fileMetaList} />
           </div>
         </section>
 
@@ -516,149 +509,5 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
         ) : null}
       </aside>
     </div>
-  );
-}
-
-function Tree({
-  node,
-  toSorted,
-  fileMeta
-}: {
-  node: FileTreeNode;
-  toSorted: (n: FileTreeNode) => FileTreeNode[];
-  fileMeta: Map<string, FileMeta>;
-}) {
-  const children = toSorted(node);
-  if (children.length === 0) return null;
-  return (
-    <ul className="m-0 pl-4 list-none first:pl-0">
-      {children.map((c) => {
-        if (!c.isFile) {
-          return (
-            <li key={c.path} className="my-1">
-              <details open={false}>
-                <summary className="cursor-pointer list-none flex items-center gap-2 px-2 py-1.5 rounded-lg min-w-0 hover:bg-card before:content-['+'] before:w-4 before:text-muted [&[open]]:before:content-['-']">
-                  <span className="text-foreground font-medium min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">
-                    {c.name}/
-                  </span>
-                  <span className="ml-auto text-muted text-xs shrink-0">{countFiles(c)} files</span>
-                </summary>
-                <Tree node={c} toSorted={toSorted} fileMeta={fileMeta} />
-              </details>
-            </li>
-          );
-        }
-
-        const meta = fileMeta.get(c.path);
-        const size = meta?.size ?? 0;
-        const githubUrl = meta?.githubUrl ?? "";
-        const preview = meta?.preview;
-
-        return (
-          <li key={c.path} className="my-1">
-            <details open={false}>
-              <summary className="cursor-pointer list-none flex items-center gap-2 px-2 py-1.5 rounded-lg min-w-0 hover:bg-card before:content-['+'] before:w-4 before:text-muted [details[open]>&]:before:content-['-']">
-                <span className="text-foreground min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">{c.name}</span>
-                <span className="ml-auto text-muted text-xs shrink-0">{formatBytes(size)}</span>
-              </summary>
-              <div className="mt-3 pt-3 px-2 pb-1 border-t border-border">
-                {preview?.kind === "skip" ? (
-                  <p className="text-secondary text-sm">
-                    {preview.reason}{" "}
-                    {c.path === "SKILL.md" ? (
-                      <a href="#instructions" className="text-accent hover:underline">
-                        Jump to instructions.
-                      </a>
-                    ) : null}
-                  </p>
-                ) : null}
-
-                {preview?.kind === "binary" ? (
-                  <p className="text-secondary text-sm">{preview.reason}</p>
-                ) : null}
-
-                {preview?.kind === "csv" ? (
-                  <div className="space-y-3">
-                    <div className="overflow-auto border border-border rounded-lg bg-card">
-                      <table className="w-full border-collapse font-mono text-xs">
-                        <thead>
-                          <tr>
-                            {preview.headers.slice(0, CSV_PREVIEW_MAX_COLS).map((h, i) => (
-                              <th
-                                key={`${c.path}-h-${i}`}
-                                className="sticky top-0 bg-background-secondary py-2 px-3 border-b border-border text-left whitespace-nowrap text-foreground font-medium"
-                              >
-                                {h || `col_${i + 1}`}
-                              </th>
-                            ))}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {preview.rows.slice(0, CSV_PREVIEW_MAX_ROWS).map((r, idx) => (
-                            <tr key={`${c.path}-r-${idx}`}>
-                              {preview.headers.slice(0, CSV_PREVIEW_MAX_COLS).map((_, i) => (
-                                <td
-                                  key={`${c.path}-r-${idx}-c-${i}`}
-                                  className="py-2 px-3 border-t border-border text-left whitespace-nowrap text-secondary"
-                                >
-                                  {r[i] ?? ""}
-                                </td>
-                              ))}
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                    {preview.truncated ? (
-                      <p className="text-muted text-sm">Preview truncated.</p>
-                    ) : null}
-                  </div>
-                ) : null}
-
-                {preview?.kind === "markdown" ? (
-                  <div className="space-y-3">
-                    <article className="markdown">
-                      <ReactMarkdown remarkPlugins={[remarkGfm]} components={MARKDOWN_COMPONENTS}>
-                        {preview.text}
-                      </ReactMarkdown>
-                    </article>
-                    {preview.truncated ? (
-                      <p className="text-muted text-sm">Preview truncated.</p>
-                    ) : null}
-                  </div>
-                ) : null}
-
-                {preview?.kind === "text" ? (
-                  <div className="space-y-3">
-                    <pre className="overflow-x-auto bg-[#0f172a] text-[#e2e8f0] rounded-lg p-4 font-mono text-xs leading-relaxed">
-                      <code>{preview.text}</code>
-                    </pre>
-                    {preview.truncated ? (
-                      <p className="text-muted text-sm">Preview truncated.</p>
-                    ) : null}
-                  </div>
-                ) : null}
-
-                <div className="flex gap-2 flex-wrap mt-3">
-                  {githubUrl ? (
-                    <a
-                      className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-border bg-card text-foreground text-sm font-medium hover:border-border-hover transition-colors"
-                      href={githubUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-                      </svg>
-                      View on GitHub
-                    </a>
-                  ) : null}
-                </div>
-              </div>
-            </details>
-          </li>
-        );
-      })}
-    </ul>
   );
 }
