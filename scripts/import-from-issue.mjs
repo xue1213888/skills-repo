@@ -159,9 +159,22 @@ async function copyDirChecked(srcDir, destDir, limits, excludePatterns = []) {
 
     let src = path.join(srcDir, e.name);
     let dest = path.join(destDir, e.name);
-    let st = await fs.lstat(src);
 
-    if (st.isSymbolicLink()) throw new Error(`Symlinks are not allowed: ${src}`);
+    // Use lstat to detect symlinks, but stat to get the real file info
+    let lstats = await fs.lstat(src);
+    let st = lstats;
+
+    // If it's a symlink, follow it to get the real file/directory
+    if (lstats.isSymbolicLink()) {
+      try {
+        st = await fs.stat(src); // This follows the symlink
+        console.log(`Following symlink: ${src}`);
+      } catch (err) {
+        // Broken symlink - skip it
+        console.warn(`⚠️  Skipping broken symlink: ${src}`);
+        continue;
+      }
+    }
 
     if (st.isDirectory()) {
       await copyDirChecked(src, dest, limits, excludePatterns);
