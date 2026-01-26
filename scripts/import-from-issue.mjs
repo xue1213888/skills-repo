@@ -7,6 +7,67 @@ import YAML from "yaml";
 
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
+// Parse SKILL.md frontmatter (YAML between --- markers)
+function parseSkillMdFrontmatter(content) {
+  const lines = content.split(/\r?\n/);
+  if (lines[0]?.trim() !== "---") return {};
+
+  let endIndex = -1;
+  for (let i = 1; i < lines.length; i++) {
+    if (lines[i]?.trim() === "---") {
+      endIndex = i;
+      break;
+    }
+  }
+
+  if (endIndex === -1) return {};
+
+  const frontmatter = lines.slice(1, endIndex).join("\n");
+  const result = {};
+
+  const titleMatch = frontmatter.match(/^title:\s*["']?(.+?)["']?\s*$/m);
+  const descMatch = frontmatter.match(/^description:\s*["']?(.+?)["']?\s*$/m);
+
+  if (titleMatch) result.title = titleMatch[1];
+  if (descMatch) result.description = descMatch[1];
+
+  return result;
+}
+
+// Extract first paragraph as description (after frontmatter and title)
+function extractDescriptionFromMarkdown(content) {
+  // Strip frontmatter
+  let md = content;
+  if (md.startsWith("---\n")) {
+    const end = md.indexOf("\n---\n", 4);
+    if (end !== -1) {
+      md = md.slice(end + 5);
+    }
+  }
+
+  md = md.trim();
+  if (!md) return "";
+
+  const lines = md.split("\n");
+
+  // Skip leading title (# ...)
+  if (lines[0]?.startsWith("#")) {
+    lines.shift();
+    while (lines.length > 0 && lines[0].trim() === "") lines.shift();
+  }
+
+  // Get first paragraph
+  const para = [];
+  for (const line of lines) {
+    if (line.trim() === "") break;
+    para.push(line);
+  }
+
+  const text = para.join(" ").trim();
+  // Truncate to 500 chars (schema limit)
+  return text.length > 500 ? text.slice(0, 497) + "..." : text;
+}
+
 function run(cmd, args, opts = {}) {
   let res = spawnSync(cmd, args, { stdio: "inherit", ...opts });
   if (res.status !== 0) throw new Error(`Command failed (${res.status}): ${cmd} ${args.join(" ")}`);
@@ -160,6 +221,14 @@ async function main() {
       throw new Error(`Missing SKILL.md at sourcePath: ${item.sourcePath}`);
     }
 
+    // Read SKILL.md and extract description
+    let skillMdContent = await fs.readFile(srcSkillMd, "utf8");
+    let frontmatter = parseSkillMdFrontmatter(skillMdContent);
+    let description = frontmatter.description || extractDescriptionFromMarkdown(skillMdContent);
+    if (!description) {
+      description = item.title; // Fallback to title if no description found
+    }
+
     let destSkillDir = path.join("skills", item.targetCategory, item.targetSubcategory, item.id);
 
     // Handle update vs new
@@ -175,11 +244,12 @@ async function main() {
     let limits = { files: 0, bytes: 0, maxFiles: 2500, maxBytes: 50 * 1024 * 1024 };
     await copyDirChecked(srcSkillDir, destSkillDir, limits);
 
-    // Generate .x_skill.yaml from issue content
+    // Generate .x_skill.yaml from issue content + SKILL.md description
     let meta = {
       specVersion: 1,
       id: item.id,
       title: item.title,
+      description: description,
       tags: item.tags.length > 0 ? item.tags : undefined,
       links: {
         docs: "./SKILL.md"

@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState, useCallback } from "react";
 
 import { REPO_SLUG } from "@/lib/config";
 
-const MAX_SKILLS_PER_IMPORT = 10;
+const MAX_SKILLS_PER_IMPORT = 20;
 
 type GhRepo = {
   full_name: string;
