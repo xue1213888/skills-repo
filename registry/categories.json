@@ -1,0 +1,187 @@
+{
+  "specVersion": 1,
+  "generatedAt": "2026-01-26T06:47:06.442Z",
+  "categories": [
+    {
+      "id": "business",
+      "title": "Business",
+      "description": "Business tools, project management, and enterprise solutions",
+      "subcategories": [
+        {
+          "id": "finance",
+          "title": "Finance",
+          "description": "Financial analysis, accounting, and business intelligence"
+        },
+        {
+          "id": "project-management",
+          "title": "Project Management",
+          "description": "Project planning, tracking, collaboration, and team management"
+        },
+        {
+          "id": "sales-marketing",
+          "title": "Sales & Marketing",
+          "description": "Marketing automation, CRM, sales tools, and customer engagement"
+        }
+      ]
+    },
+    {
+      "id": "data-ai",
+      "title": "Data & AI",
+      "description": "Data analysis, machine learning, and artificial intelligence",
+      "subcategories": [
+        {
+          "id": "data-analysis",
+          "title": "Data Analysis",
+          "description": "Data visualization, analytics, and business intelligence"
+        },
+        {
+          "id": "llm-ai",
+          "title": "LLM & AI",
+          "description": "Large language models, AI agents, and generative AI tools"
+        },
+        {
+          "id": "ml-ops",
+          "title": "ML Ops",
+          "description": "Machine learning operations, model deployment, and monitoring"
+        }
+      ]
+    },
+    {
+      "id": "design",
+      "title": "Design",
+      "description": "Design-related skills (UI/UX, branding, research, etc.)",
+      "subcategories": [
+        {
+          "id": "ui-ux",
+          "title": "UI/UX",
+          "description": "User interface and user experience skills"
+        }
+      ]
+    },
+    {
+      "id": "development",
+      "title": "Development",
+      "description": "Software development, coding, and engineering skills",
+      "subcategories": [
+        {
+          "id": "architecture",
+          "title": "Architecture",
+          "description": "Software architecture, design patterns, and system design"
+        },
+        {
+          "id": "backend",
+          "title": "Backend",
+          "description": "Backend development, APIs, databases, and server-side logic"
+        },
+        {
+          "id": "cms-platforms",
+          "title": "CMS & Platforms",
+          "description": "Content management systems, platforms, and framework integration"
+        },
+        {
+          "id": "frontend",
+          "title": "Frontend",
+          "description": "Frontend development, UI components, and client-side applications"
+        },
+        {
+          "id": "mobile",
+          "title": "Mobile",
+          "description": "Mobile app development for iOS, Android, and cross-platform"
+        }
+      ]
+    },
+    {
+      "id": "devops",
+      "title": "DevOps",
+      "description": "DevOps practices, CI/CD, infrastructure, and deployment automation",
+      "subcategories": [
+        {
+          "id": "ci-cd",
+          "title": "CI/CD",
+          "description": "Continuous integration, continuous deployment, and release automation"
+        },
+        {
+          "id": "git-workflows",
+          "title": "Git Workflows",
+          "description": "Version control, branching strategies, and Git automation"
+        },
+        {
+          "id": "infrastructure",
+          "title": "Infrastructure",
+          "description": "Infrastructure as code, cloud platforms, and server management"
+        },
+        {
+          "id": "monitoring",
+          "title": "Monitoring",
+          "description": "Application monitoring, logging, and observability"
+        }
+      ]
+    },
+    {
+      "id": "documentation",
+      "title": "Documentation",
+      "description": "Technical writing, knowledge management, and documentation tools",
+      "subcategories": [
+        {
+          "id": "api-docs",
+          "title": "API Docs",
+          "description": "API documentation, reference guides, and OpenAPI specs"
+        },
+        {
+          "id": "knowledge-base",
+          "title": "Knowledge Base",
+          "description": "Internal wikis, knowledge repositories, and team documentation"
+        },
+        {
+          "id": "technical-docs",
+          "title": "Technical Docs",
+          "description": "User guides, tutorials, and technical documentation"
+        }
+      ]
+    },
+    {
+      "id": "testing-security",
+      "title": "Testing & Security",
+      "description": "Software testing, quality assurance, and security practices",
+      "subcategories": [
+        {
+          "id": "code-quality",
+          "title": "Code Quality",
+          "description": "Code review, linting, static analysis, and quality metrics"
+        },
+        {
+          "id": "security",
+          "title": "Security",
+          "description": "Security testing, vulnerability scanning, and secure coding practices"
+        },
+        {
+          "id": "testing",
+          "title": "Testing",
+          "description": "Unit testing, integration testing, E2E testing, and test automation"
+        }
+      ]
+    },
+    {
+      "id": "tools",
+      "title": "Tools",
+      "description": "Development tools, productivity utilities, and automation scripts",
+      "subcategories": [
+        {
+          "id": "automation",
+          "title": "Automation",
+          "description": "Task automation, scripting, and process automation tools"
+        },
+        {
+          "id": "debug",
+          "title": "Debug",
+          "description": "Debugging tools, logging utilities, and troubleshooting aids"
+        },
+        {
+          "id": "productivity",
+          "title": "Productivity",
+          "description": "Productivity tools, workflow optimization, and efficiency utilities"
+        }
+      ]
+    }
+  ]
+}

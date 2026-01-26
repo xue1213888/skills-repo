@@ -1,0 +1,1607 @@
+{
+  "specVersion": 1,
+  "generatedAt": "2026-01-26T06:47:06.442Z",
+  "skills": [
+    {
+      "specVersion": 1,
+      "id": "algorithmic-art",
+      "title": "algorithmic-art",
+      "description": "Creating algorithmic art using p5.js with seeded randomness and interactive parameter exploration. Use this when users request creating art using code, generative art, algorithmic art, flow fields, or particle systems. Create original algorithmic art rather than copying existing artists' work to avoid copyright violations.",
+      "tags": [
+        "test"
+      ],
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/algorithmic-art",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "design",
+      "subcategory": "ui-ux",
+      "repoPath": "skills/design/ui-ux/algorithmic-art",
+      "summary": "Algorithmic philosophies are computational aesthetic movements that are then expressed through code. Output .md files (philosophy), .html files (interactive viewer), and .js files (generative algorithms).",
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        },
+        {
+          "path": "templates/generator_template.js",
+          "kind": "file"
+        },
+        {
+          "path": "templates/viewer.html",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "brand-guidelines",
+      "title": "Anthropic Brand Styling",
+      "description": "Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it when brand colors or style guidelines, visual formatting, or company design standards apply.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/brand-guidelines",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "design",
+      "subcategory": "ui-ux",
+      "repoPath": "skills/design/ui-ux/brand-guidelines",
+      "summary": "## Overview",
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "canvas-design",
+      "title": "canvas-design",
+      "description": "Create beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, piece of art, design, or other static piece. Create original visual designs, never copying existing artists' work to avoid copyright violations.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/canvas-design",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "design",
+      "subcategory": "ui-ux",
+      "repoPath": "skills/design/ui-ux/canvas-design",
+      "summary": "These are instructions for creating design philosophies - aesthetic movements that are then EXPRESSED VISUALLY. Output only .md files, .pdf files, and .png files.",
+      "files": [
+        {
+          "path": "canvas-fonts/ArsenalSC-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/ArsenalSC-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/BigShoulders-Bold.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/BigShoulders-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/BigShoulders-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Boldonse-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Boldonse-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/BricolageGrotesque-Bold.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/BricolageGrotesque-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/BricolageGrotesque-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/CrimsonPro-Bold.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/CrimsonPro-Italic.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/CrimsonPro-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/CrimsonPro-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/DMMono-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/DMMono-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/EricaOne-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/EricaOne-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/GeistMono-Bold.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/GeistMono-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/GeistMono-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Gloock-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Gloock-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/IBMPlexMono-Bold.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/IBMPlexMono-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/IBMPlexMono-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/IBMPlexSerif-Bold.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/IBMPlexSerif-BoldItalic.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/IBMPlexSerif-Italic.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/IBMPlexSerif-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/InstrumentSans-Bold.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/InstrumentSans-BoldItalic.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/InstrumentSans-Italic.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/InstrumentSans-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/InstrumentSans-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/InstrumentSerif-Italic.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/InstrumentSerif-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Italiana-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Italiana-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/JetBrainsMono-Bold.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/JetBrainsMono-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/JetBrainsMono-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Jura-Light.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Jura-Medium.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Jura-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/LibreBaskerville-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/LibreBaskerville-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Lora-Bold.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Lora-BoldItalic.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Lora-Italic.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Lora-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Lora-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/NationalPark-Bold.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/NationalPark-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/NationalPark-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/NothingYouCouldDo-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/NothingYouCouldDo-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Outfit-Bold.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Outfit-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Outfit-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/PixelifySans-Medium.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/PixelifySans-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/PoiretOne-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/PoiretOne-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/RedHatMono-Bold.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/RedHatMono-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/RedHatMono-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Silkscreen-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Silkscreen-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/SmoochSans-Medium.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/SmoochSans-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Tektur-Medium.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Tektur-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/Tektur-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/WorkSans-Bold.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/WorkSans-BoldItalic.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/WorkSans-Italic.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/WorkSans-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/WorkSans-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/YoungSerif-OFL.txt",
+          "kind": "file"
+        },
+        {
+          "path": "canvas-fonts/YoungSerif-Regular.ttf",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "doc-coauthoring",
+      "title": "Doc Co-Authoring Workflow",
+      "description": "Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc works for readers. Trigger when user mentions writing docs, creating proposals, drafting specs, or similar documentation tasks.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/doc-coauthoring",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "design",
+      "subcategory": "ui-ux",
+      "repoPath": "skills/design/ui-ux/doc-coauthoring",
+      "summary": "This skill provides a structured workflow for guiding users through collaborative document creation. Act as an active guide, walking users through three stages: Context Gathering, Refinement & Structure, and Reader Testing.",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "docx",
+      "title": "DOCX creation, editing, and analysis",
+      "description": "Comprehensive document creation, editing, and analysis with support for tracked changes, comments, formatting preservation, and text extraction. When Claude needs to work with professional documents (.docx files) for: (1) Creating new documents, (2) Modifying or editing content, (3) Working with tracked changes, (4) Adding comments, or any other document tasks",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/docx",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "design",
+      "subcategory": "ui-ux",
+      "repoPath": "skills/design/ui-ux/docx",
+      "summary": "## Overview",
+      "files": [
+        {
+          "path": "docx-js.md",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml.md",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ecma/fouth-edition/opc-contentTypes.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ecma/fouth-edition/opc-coreProperties.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ecma/fouth-edition/opc-digSig.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ecma/fouth-edition/opc-relationships.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-chart.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-chartDrawing.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-diagram.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-lockedCanvas.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-main.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-picture.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-spreadsheetDrawing.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-wordprocessingDrawing.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/pml.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-additionalCharacteristics.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-bibliography.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-commonSimpleTypes.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-customXmlDataProperties.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-customXmlSchemaProperties.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesCustom.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesExtended.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesVariantTypes.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-math.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-relationshipReference.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/sml.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-main.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-officeDrawing.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-presentationDrawing.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-spreadsheetDrawing.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-wordprocessingDrawing.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/wml.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/xml.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/mce/mc.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/microsoft/wml-2010.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/microsoft/wml-2012.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/microsoft/wml-2018.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/microsoft/wml-cex-2018.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/microsoft/wml-cid-2016.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/microsoft/wml-sdtdatahash-2020.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/microsoft/wml-symex-2015.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/scripts/pack.py",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/scripts/unpack.py",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/scripts/validate.py",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/scripts/validation/__init__.py",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/scripts/validation/base.py",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/scripts/validation/docx.py",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/scripts/validation/pptx.py",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/scripts/validation/redlining.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/__init__.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/document.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/templates/comments.xml",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/templates/commentsExtended.xml",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/templates/commentsExtensible.xml",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/templates/commentsIds.xml",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/templates/people.xml",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/utilities.py",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "frontend-design",
+      "title": "frontend-design",
+      "description": "Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/frontend-design",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "design",
+      "subcategory": "ui-ux",
+      "repoPath": "skills/design/ui-ux/frontend-design",
+      "summary": "This skill guides creation of distinctive, production-grade frontend interfaces that avoid generic \"AI slop\" aesthetics. Implement real working code with exceptional attention to aesthetic details and creative choices.",
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "internal-comms",
+      "title": "internal-comms",
+      "description": "A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/internal-comms",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "design",
+      "subcategory": "ui-ux",
+      "repoPath": "skills/design/ui-ux/internal-comms",
+      "summary": "To write internal communications, use this skill for:\n- 3P updates (Progress, Plans, Problems)\n- Company newsletters\n- FAQ responses\n- Status reports\n- Leadership updates\n- Project updates\n- Incident reports",
+      "files": [
+        {
+          "path": "examples/3p-updates.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/company-newsletter.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/faq-answers.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/general-comms.md",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "mcp-builder",
+      "title": "MCP Server Development Guide",
+      "description": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/mcp-builder",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "design",
+      "subcategory": "ui-ux",
+      "repoPath": "skills/design/ui-ux/mcp-builder",
+      "summary": "## Overview",
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "reference/evaluation.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/mcp_best_practices.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/node_mcp_server.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/python_mcp_server.md",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/connections.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/evaluation.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/example_evaluation.xml",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/requirements.txt",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "pdf",
+      "title": "PDF Processing Guide",
+      "description": "Comprehensive PDF manipulation toolkit for extracting text and tables, creating new PDFs, merging/splitting documents, and handling forms. When Claude needs to fill in a PDF form or programmatically process, generate, or analyze PDF documents at scale.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/pdf",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "design",
+      "subcategory": "ui-ux",
+      "repoPath": "skills/design/ui-ux/pdf",
+      "summary": "## Overview",
+      "files": [
+        {
+          "path": "forms.md",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "reference.md",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/check_bounding_boxes_test.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/check_bounding_boxes.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/check_fillable_fields.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/convert_pdf_to_images.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/create_validation_image.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/extract_form_field_info.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/fill_fillable_fields.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/fill_pdf_form_with_annotations.py",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "pptx",
+      "title": "PPTX creation, editing, and analysis",
+      "description": "Presentation creation, editing, and analysis. When Claude needs to work with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing content, (3) Working with layouts, (4) Adding comments or speaker notes, or any other presentation tasks",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/pptx",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "design",
+      "subcategory": "ui-ux",
+      "repoPath": "skills/design/ui-ux/pptx",
+      "summary": "## Overview",
+      "files": [
+        {
+          "path": "html2pptx.md",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml.md",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ecma/fouth-edition/opc-contentTypes.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ecma/fouth-edition/opc-coreProperties.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ecma/fouth-edition/opc-digSig.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ecma/fouth-edition/opc-relationships.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-chart.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-chartDrawing.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-diagram.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-lockedCanvas.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-main.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-picture.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-spreadsheetDrawing.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-wordprocessingDrawing.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/pml.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-additionalCharacteristics.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-bibliography.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-commonSimpleTypes.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-customXmlDataProperties.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-customXmlSchemaProperties.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesCustom.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesExtended.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesVariantTypes.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-math.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-relationshipReference.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/sml.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-main.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-officeDrawing.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-presentationDrawing.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-spreadsheetDrawing.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-wordprocessingDrawing.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/wml.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/xml.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/mce/mc.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/microsoft/wml-2010.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/microsoft/wml-2012.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/microsoft/wml-2018.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/microsoft/wml-cex-2018.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/microsoft/wml-cid-2016.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/microsoft/wml-sdtdatahash-2020.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/schemas/microsoft/wml-symex-2015.xsd",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/scripts/pack.py",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/scripts/unpack.py",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/scripts/validate.py",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/scripts/validation/__init__.py",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/scripts/validation/base.py",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/scripts/validation/docx.py",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/scripts/validation/pptx.py",
+          "kind": "file"
+        },
+        {
+          "path": "ooxml/scripts/validation/redlining.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/html2pptx.js",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/inventory.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/rearrange.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/replace.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/thumbnail.py",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "skill-creator",
+      "title": "Skill Creator",
+      "description": "Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Claude's capabilities with specialized knowledge, workflows, or tool integrations.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/skill-creator",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "design",
+      "subcategory": "ui-ux",
+      "repoPath": "skills/design/ui-ux/skill-creator",
+      "summary": "This skill provides guidance for creating effective skills.",
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "references/output-patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workflows.md",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/init_skill.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/package_skill.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/quick_validate.py",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "slack-gif-creator",
+      "title": "Slack GIF Creator",
+      "description": "Knowledge and utilities for creating animated GIFs optimized for Slack. Provides constraints, validation tools, and animation concepts. Use when users request animated GIFs for Slack like \"make me a GIF of X doing Y for Slack.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/slack-gif-creator",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "design",
+      "subcategory": "ui-ux",
+      "repoPath": "skills/design/ui-ux/slack-gif-creator",
+      "summary": "A toolkit providing utilities and knowledge for creating animated GIFs optimized for Slack.",
+      "files": [
+        {
+          "path": "core/easing.py",
+          "kind": "file"
+        },
+        {
+          "path": "core/frame_composer.py",
+          "kind": "file"
+        },
+        {
+          "path": "core/gif_builder.py",
+          "kind": "file"
+        },
+        {
+          "path": "core/validators.py",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "requirements.txt",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "template",
+      "title": "Insert instructions below",
+      "description": "Replace with description of the skill and when Claude should use it.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "template",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "design",
+      "subcategory": "ui-ux",
+      "repoPath": "skills/design/ui-ux/template",
+      "summary": "",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "theme-factory",
+      "title": "Theme Factory Skill",
+      "description": "Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/theme-factory",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "design",
+      "subcategory": "ui-ux",
+      "repoPath": "skills/design/ui-ux/theme-factory",
+      "summary": "This skill provides a curated collection of professional font and color themes themes, each with carefully selected color palettes and font pairings. Once a theme is chosen, it can be applied to any artifact.",
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        },
+        {
+          "path": "theme-showcase.pdf",
+          "kind": "file"
+        },
+        {
+          "path": "themes/arctic-frost.md",
+          "kind": "file"
+        },
+        {
+          "path": "themes/botanical-garden.md",
+          "kind": "file"
+        },
+        {
+          "path": "themes/desert-rose.md",
+          "kind": "file"
+        },
+        {
+          "path": "themes/forest-canopy.md",
+          "kind": "file"
+        },
+        {
+          "path": "themes/golden-hour.md",
+          "kind": "file"
+        },
+        {
+          "path": "themes/midnight-galaxy.md",
+          "kind": "file"
+        },
+        {
+          "path": "themes/modern-minimalist.md",
+          "kind": "file"
+        },
+        {
+          "path": "themes/ocean-depths.md",
+          "kind": "file"
+        },
+        {
+          "path": "themes/sunset-boulevard.md",
+          "kind": "file"
+        },
+        {
+          "path": "themes/tech-innovation.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "ui-ux-pro-max",
+      "title": "UI/UX Pro Max - Design Intelligence",
+      "description": "UI/UX design intelligence. 50 styles, 21 palettes, 50 font pairings, 20 charts, 9 stacks (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Actions: plan, build, create, design, implement, review, fix, improve, optimize, enhance, refactor, check UI/UX code. Projects: website, landing page, dashboard, admin panel, e-commerce, SaaS, portfolio, blog, mobile app, .html, .tsx, .vue, .svelte. Elements: button, modal, navbar, sidebar, card, table, form, chart. Styles: glassmorphism, claymorphism, minimalism, brutalism, neumorphism, bento grid, dark mode, responsive, skeuomorphism, flat design. Topics: color palette, accessibility, animation, layout, typography, font pairing, spacing, hover, shadow, gradient. Integrations: shadcn/ui MCP for component search and examples.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+        "path": ".claude/skills/ui-ux-pro-max",
+        "ref": "main",
+        "commit": "3eb7d99d67b6e7a33807463dbbb0d01940a96e1f"
+      },
+      "category": "design",
+      "subcategory": "ui-ux",
+      "repoPath": "skills/design/ui-ux/ui-ux-pro-max",
+      "summary": "Comprehensive design guide for web and mobile applications. Contains 50+ styles, 97 color palettes, 57 font pairings, 99 UX guidelines, and 25 chart types across 9 technology stacks. Searchable database with priority-based recommendations.",
+      "files": [
+        {
+          "path": "data/charts.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/colors.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/icons.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/landing.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/products.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/react-performance.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/astro.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/flutter.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/html-tailwind.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/jetpack-compose.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/nextjs.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/nuxt-ui.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/nuxtjs.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/react-native.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/react.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/shadcn.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/svelte.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/swiftui.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/vue.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/styles.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/typography.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/ui-reasoning.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/ux-guidelines.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/web-interface.csv",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/core.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/design_system.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/search.py",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "web-artifacts-builder",
+      "title": "Web Artifacts Builder",
+      "description": "Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/web-artifacts-builder",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "design",
+      "subcategory": "ui-ux",
+      "repoPath": "skills/design/ui-ux/web-artifacts-builder",
+      "summary": "To build powerful frontend claude.ai artifacts, follow these steps:\n1. Initialize the frontend repo using `scripts/init-artifact.sh`\n2. Develop your artifact by editing the generated code\n3. Bundle all code into a single HTML file using `scripts/bundle-artifact.sh`\n4. Display artifact to user\n5. (Optional) Test the artifact",
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/bundle-artifact.sh",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/init-artifact.sh",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/shadcn-components.tar.gz",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "webapp-testing",
+      "title": "Web Application Testing",
+      "description": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/webapp-testing",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "design",
+      "subcategory": "ui-ux",
+      "repoPath": "skills/design/ui-ux/webapp-testing",
+      "summary": "To test local web applications, write native Python Playwright scripts.",
+      "files": [
+        {
+          "path": "examples/console_logging.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/element_discovery.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/static_html_automation.py",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/with_server.py",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "xlsx",
+      "title": "Requirements for Outputs",
+      "description": "Comprehensive spreadsheet creation, editing, and analysis with support for formulas, formatting, data analysis, and visualization. When Claude needs to work with spreadsheets (.xlsx, .xlsm, .csv, .tsv, etc) for: (1) Creating new spreadsheets with formulas and formatting, (2) Reading or analyzing data, (3) Modify existing spreadsheets while preserving formulas, (4) Data analysis and visualization in spreadsheets, or (5) Recalculating formulas",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/xlsx",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "design",
+      "subcategory": "ui-ux",
+      "repoPath": "skills/design/ui-ux/xlsx",
+      "summary": "## All Excel files",
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "recalc.py",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    }
+  ]
+}
