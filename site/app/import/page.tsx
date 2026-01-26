@@ -395,6 +395,10 @@ export default function ImportPage() {
         const meta = skillMetadata[s.sourcePath];
         const { conflict } = checkExistingSkill(s.id, sourceRepoUrl, s.sourcePath);
         const finalId = meta?.newId || s.id;
+        // isUpdate is true if:
+        // 1. Same source (definitely an update)
+        // 2. Same ID and no newId provided (user wants to replace existing skill)
+        const isUpdate = conflict === "same-source" || (conflict === "same-id" && !meta?.newId);
         return {
           sourcePath: s.sourcePath,
           id: finalId,
@@ -403,7 +407,7 @@ export default function ImportPage() {
           targetCategory: meta?.category ?? defaultCategory,
           targetSubcategory: meta?.subcategory ?? defaultSubcategory,
           tags: meta?.tags ?? [],
-          isUpdate: conflict === "same-source",
+          isUpdate,
         };
       })
     };
