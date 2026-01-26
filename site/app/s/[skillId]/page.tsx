@@ -11,6 +11,7 @@ import remarkGfm from "remark-gfm";
 import { SkillMiniCard } from "@/components/SkillMiniCard";
 import { QuickInstallClient } from "@/components/QuickInstallClient";
 import { FileTreeClient } from "@/components/FileTreeClient";
+import { MarkdownCodeBlock } from "@/components/CodeBlock";
 import { REPO_URL } from "@/lib/config";
 import { getSkillById, loadRegistryIndex } from "@/lib/registry";
 
@@ -30,7 +31,16 @@ const MARKDOWN_COMPONENTS: Components = {
         <table {...props} />
       </div>
     );
-  }
+  },
+  code(props) {
+    const { className, children, ...rest } = props;
+    const isInline = !className?.includes("language-");
+    return (
+      <MarkdownCodeBlock inline={isInline} className={className} {...rest}>
+        {children}
+      </MarkdownCodeBlock>
+    );
+  },
 };
 
 type FileTreeNode = {

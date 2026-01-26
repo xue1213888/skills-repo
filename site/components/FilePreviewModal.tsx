@@ -6,6 +6,8 @@ import ReactMarkdown from "react-markdown";
 import type { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 
+import { CodeBlock, MarkdownCodeBlock, getLanguageFromExt } from "./CodeBlock";
+
 export type FilePreview =
   | { kind: "skip"; reason: string }
   | { kind: "binary"; reason: string }
@@ -30,7 +32,17 @@ const MARKDOWN_COMPONENTS: Components = {
         <table {...props} />
       </div>
     );
-  }
+  },
+  code(props) {
+    const { className, children, ...rest } = props;
+    // Check if this is an inline code block
+    const isInline = !className?.includes("language-");
+    return (
+      <MarkdownCodeBlock inline={isInline} className={className} {...rest}>
+        {children}
+      </MarkdownCodeBlock>
+    );
+  },
 };
 
 function formatBytes(bytes: number) {
@@ -277,19 +289,11 @@ export function FilePreviewModal({
 
           {preview.kind === "text" && (
             <div>
-              <pre style={{
-                overflow: "auto",
-                backgroundColor: "#0f172a",
-                color: "#e2e8f0",
-                borderRadius: "12px",
-                padding: "20px",
-                fontFamily: "var(--font-mono)",
-                fontSize: "13px",
-                lineHeight: 1.6,
-                margin: 0,
-              }}>
-                <code>{preview.text}</code>
-              </pre>
+              <CodeBlock
+                code={preview.text}
+                language={getLanguageFromExt(file.ext)}
+                showLineNumbers={preview.text.split("\n").length > 3}
+              />
               {preview.truncated && (
                 <p className="text-muted" style={{ margin: "12px 0 0", fontSize: "14px", textAlign: "center" }}>Preview truncated. View full file on GitHub.</p>
               )}

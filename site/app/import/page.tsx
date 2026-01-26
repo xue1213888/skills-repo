@@ -28,8 +28,19 @@ type DetectedSkill = {
 type SkillMetadata = {
   category: string;
   subcategory: string;
+  description: string;
   tags: string[];
+  agents: string[];
 };
+
+// Available agents for skill support
+const AVAILABLE_AGENTS = [
+  { id: "codex", label: "Codex" },
+  { id: "claude", label: "Claude Code" },
+  { id: "opencode", label: "OpenCode" },
+  { id: "cursor", label: "Cursor" },
+  { id: "antigravity", label: "Antigravity" },
+];
 
 type RegistryCategories = {
   categories: Array<{ id: string; title: string; subcategories: Array<{ id: string; title: string }> }>;
@@ -137,13 +148,16 @@ function extractTitleFromMarkdown(content: string): string | undefined {
 function buildIssueBody(args: {
   sourceRepoUrl: string;
   ref: string;
+  reviewUrl: string;
   items: Array<{
     sourcePath: string;
     id: string;
     title: string;
+    description: string;
     targetCategory: string;
     targetSubcategory: string;
     tags: string[];
+    agents: string[];
   }>;
 }) {
   const itemLines = args.items.map((it) => {
@@ -151,6 +165,7 @@ function buildIssueBody(args: {
       `  - sourcePath: ${it.sourcePath}`,
       `    id: ${it.id}`,
       `    title: "${it.title.replace(/"/g, '\\"')}"`,
+      `    description: "${it.description.replace(/"/g, '\\"')}"`,
       `    targetCategory: ${it.targetCategory}`,
       `    targetSubcategory: ${it.targetSubcategory}`,
     ];
@@ -160,11 +175,17 @@ function buildIssueBody(args: {
         lines.push(`      - ${tag}`);
       }
     }
+    if (it.agents.length > 0) {
+      lines.push(`    agents:`);
+      for (const agent of it.agents) {
+        lines.push(`      - ${agent}`);
+      }
+    }
     return lines.join("\n");
   });
 
   const block = [
-    "<!-- skillhub-import:v1",
+    "<!-- skillhub-import:v2",
     `sourceRepo: ${args.sourceRepoUrl}`,
     `ref: ${args.ref}`,
     "items:",
@@ -179,7 +200,16 @@ function buildIssueBody(args: {
     "",
     "## Skills to import",
     "",
-    ...args.items.map((it) => `- **${it.title}** (\`${it.id}\`) → \`${it.targetCategory}/${it.targetSubcategory}\`${it.tags.length > 0 ? ` [${it.tags.join(", ")}]` : ""}`),
+    ...args.items.map((it) => {
+      let line = `- **${it.title}** (\`${it.id}\`) → \`${it.targetCategory}/${it.targetSubcategory}\``;
+      if (it.tags.length > 0) line += ` [${it.tags.join(", ")}]`;
+      if (it.agents.length > 0) line += ` (${it.agents.join(", ")})`;
+      return line;
+    }),
+    "",
+    `## Review`,
+    "",
+    `[Preview imported skills](${args.reviewUrl})`,
     "",
     block,
     ""
@@ -286,18 +316,57 @@ export default function ImportPage() {
     });
   }, []);
 
+  // Toggle agent for a skill
+  const toggleAgent = useCallback((sourcePath: string, agentId: string) => {
+    setSkillMetadata((prev) => {
+      const current = prev[sourcePath];
+      if (!current) return prev;
+      const hasAgent = current.agents.includes(agentId);
+      return {
+        ...prev,
+        [sourcePath]: {
+          ...current,
+          agents: hasAgent
+            ? current.agents.filter((a) => a !== agentId)
+            : [...current.agents, agentId],
+        }
+      };
+    });
+  }, []);
+
   const selectedItems = useMemo(() => detected.filter((d) => selected[d.sourcePath]), [detected, selected]);
+
+  // Build review URL with encoded data
+  const reviewData = useMemo(() => {
+    if (selectedItems.length === 0 || !sourceRepoUrl || !resolvedRef) return null;
+    return {
+      sourceRepo: sourceRepoUrl,
+      ref: resolvedRef,
+      items: selectedItems.map((s) => ({
+        sourcePath: s.sourcePath,
+        id: s.id,
+        title: s.title,
+        description: skillMetadata[s.sourcePath]?.description ?? s.description,
+        targetCategory: skillMetadata[s.sourcePath]?.category ?? defaultCategory,
+        targetSubcategory: skillMetadata[s.sourcePath]?.subcategory ?? defaultSubcategory,
+        tags: skillMetadata[s.sourcePath]?.tags ?? [],
+        agents: skillMetadata[s.sourcePath]?.agents ?? [],
+      }))
+    };
+  }, [selectedItems, sourceRepoUrl, resolvedRef, skillMetadata, defaultCategory, defaultSubcategory]);
+
+  const reviewUrl = useMemo(() => {
+    if (!reviewData) return "";
+    const encoded = btoa(encodeURIComponent(JSON.stringify(reviewData)));
+    return `${typeof window !== "undefined" ? window.location.origin : ""}/review?data=${encoded}`;
+  }, [reviewData]);
 
   const issueUrl = useMemo(() => {
     if (!REPO_SLUG) return "";
-    if (selectedItems.length === 0) return "";
-    if (!sourceRepoUrl || !resolvedRef) return "";
+    if (!reviewData) return "";
 
     // Check if all selected items have valid metadata
-    const allHaveMetadata = selectedItems.every((s) => {
-      const meta = skillMetadata[s.sourcePath];
-      return meta && meta.category && meta.subcategory;
-    });
+    const allHaveMetadata = reviewData.items.every((it) => it.targetCategory && it.targetSubcategory);
     if (!allHaveMetadata) return "";
 
     let repoSlug = sourceRepoUrl;
@@ -307,18 +376,12 @@ export default function ImportPage() {
     const body = buildIssueBody({
       sourceRepoUrl,
       ref: resolvedRef,
-      items: selectedItems.map((s) => ({
-        sourcePath: s.sourcePath,
-        id: s.id,
-        title: s.title,
-        targetCategory: skillMetadata[s.sourcePath]?.category ?? defaultCategory,
-        targetSubcategory: skillMetadata[s.sourcePath]?.subcategory ?? defaultSubcategory,
-        tags: skillMetadata[s.sourcePath]?.tags ?? [],
-      }))
+      reviewUrl,
+      items: reviewData.items
     });
 
     return `https://github.com/${REPO_SLUG}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
-  }, [sourceRepoUrl, resolvedRef, selectedItems, skillMetadata, defaultCategory, defaultSubcategory]);
+  }, [sourceRepoUrl, resolvedRef, reviewData, reviewUrl]);
 
   async function onParse() {
     setError(null);
@@ -383,7 +446,9 @@ export default function ImportPage() {
           initialMetadata[sourcePath] = {
             category: defaultCategory,
             subcategory: defaultSubcategory,
+            description: description,
             tags: [],
+            agents: [],
           };
         } catch {
           // Skip if we can't read the file
@@ -655,6 +720,18 @@ export default function ImportPage() {
                   {isExpanded && meta && (
                     <div className="px-4 pb-4 pt-0 border-t border-border/50">
                       <div className="pt-4 space-y-4">
+                        {/* Description */}
+                        <div>
+                          <label className="block text-xs font-medium text-muted mb-1.5">Description</label>
+                          <textarea
+                            className="w-full px-3 py-2 bg-card border border-border rounded-lg text-foreground text-sm placeholder:text-muted focus:outline-none focus:border-accent transition-colors resize-none"
+                            rows={2}
+                            placeholder="Brief description of the skill..."
+                            value={meta.description}
+                            onChange={(e) => updateSkillMetadata(s.sourcePath, { description: e.target.value })}
+                          />
+                        </div>
+
                         {/* Category and Subcategory */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                           <div>
@@ -692,6 +769,30 @@ export default function ImportPage() {
                               ))}
                             </select>
                           </div>
+                        </div>
+
+                        {/* Agents */}
+                        <div>
+                          <label className="block text-xs font-medium text-muted mb-1.5">Supported Agents</label>
+                          <div className="flex flex-wrap gap-2">
+                            {AVAILABLE_AGENTS.map((agent) => (
+                              <button
+                                key={agent.id}
+                                type="button"
+                                onClick={() => toggleAgent(s.sourcePath, agent.id)}
+                                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                                  meta.agents.includes(agent.id)
+                                    ? "bg-accent text-white"
+                                    : "bg-card border border-border text-foreground hover:border-accent"
+                                }`}
+                              >
+                                {agent.label}
+                              </button>
+                            ))}
+                          </div>
+                          <p className="text-xs text-muted mt-1.5">
+                            Select which agents this skill supports.
+                          </p>
                         </div>
 
                         {/* Tags */}

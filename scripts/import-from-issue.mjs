@@ -13,9 +13,14 @@ function run(cmd, args, opts = {}) {
 }
 
 function extractImportBlock(issueBody) {
-  let marker = "<!-- skillhub-import:v1";
+  let marker = "<!-- skillhub-import:v2";
   let start = issueBody.indexOf(marker);
-  if (start === -1) throw new Error("Missing import block marker: <!-- skillhub-import:v1");
+  // Fallback to v1 for backward compatibility
+  if (start === -1) {
+    marker = "<!-- skillhub-import:v1";
+    start = issueBody.indexOf(marker);
+  }
+  if (start === -1) throw new Error("Missing import block marker: <!-- skillhub-import:v2 (or v1)");
   let end = issueBody.indexOf("-->", start);
   if (end === -1) throw new Error("Missing import block terminator: -->");
   let inner = issueBody.slice(start + marker.length, end).trim();
@@ -51,18 +56,26 @@ function parseRequest(issueBody) {
 
   let items = req.items.map((it, idx) => {
     if (!it || typeof it !== "object") throw new Error(`items[${idx}] must be an object`);
+
     let sourcePath = normalizeSourcePath(it.sourcePath ?? ".");
     let targetCategory = it.targetCategory;
     let targetSubcategory = it.targetSubcategory;
     assertSlug(`items[${idx}].targetCategory`, targetCategory);
     assertSlug(`items[${idx}].targetSubcategory`, targetSubcategory);
 
-    // Parse optional fields
+    // Required fields for .x_skill.yaml generation
     let id = typeof it.id === "string" ? it.id.trim() : undefined;
-    let title = typeof it.title === "string" ? it.title.trim() : undefined;
-    let tags = Array.isArray(it.tags) ? it.tags.filter(t => typeof t === "string" && t.trim()).map(t => t.trim()) : [];
+    if (!id) throw new Error(`items[${idx}].id is required`);
+    assertSlug(`items[${idx}].id`, id);
 
-    return { sourcePath, targetCategory, targetSubcategory, id, title, tags };
+    let title = typeof it.title === "string" ? it.title.trim() : id;
+    let description = typeof it.description === "string" ? it.description.trim() : "";
+
+    // Optional fields
+    let tags = Array.isArray(it.tags) ? it.tags.filter(t => typeof t === "string" && t.trim()).map(t => t.trim()) : [];
+    let agents = Array.isArray(it.agents) ? it.agents.filter(a => typeof a === "string" && a.trim()).map(a => a.trim()) : [];
+
+    return { sourcePath, targetCategory, targetSubcategory, id, title, description, tags, agents };
   });
 
   return {
@@ -72,12 +85,17 @@ function parseRequest(issueBody) {
   };
 }
 
-async function copyDirChecked(srcDir, destDir, limits) {
+async function copyDirChecked(srcDir, destDir, limits, excludePatterns = []) {
   await fs.mkdir(destDir, { recursive: true });
   let entries = await fs.readdir(srcDir, { withFileTypes: true });
 
   for (let e of entries) {
+    // Skip common non-skill directories and files
     if (e.name === ".git" || e.name === "node_modules" || e.name === ".next" || e.name === "dist" || e.name === "out") continue;
+    // Skip .x_skill.yaml and skill.yaml from source (we generate our own)
+    if (e.name === ".x_skill.yaml" || e.name === "skill.yaml") continue;
+    // Skip any excluded patterns
+    if (excludePatterns.some(p => e.name === p || e.name.match(new RegExp(p)))) continue;
 
     let src = path.join(srcDir, e.name);
     let dest = path.join(destDir, e.name);
@@ -86,7 +104,7 @@ async function copyDirChecked(srcDir, destDir, limits) {
     if (st.isSymbolicLink()) throw new Error(`Symlinks are not allowed: ${src}`);
 
     if (st.isDirectory()) {
-      await copyDirChecked(src, dest, limits);
+      await copyDirChecked(src, dest, limits, excludePatterns);
       continue;
     }
 
@@ -136,72 +154,47 @@ async function main() {
 
   for (let item of req.items) {
     let srcSkillDir = item.sourcePath === "." ? srcRepoDir : path.join(srcRepoDir, item.sourcePath);
-
-    let srcSkillYaml = path.join(srcSkillDir, ".x_skill.yaml");
-    let srcLegacyYaml = path.join(srcSkillDir, "skill.yaml");
     let srcSkillMd = path.join(srcSkillDir, "SKILL.md");
-    try {
-      try {
-        await fs.access(srcSkillYaml);
-      } catch {
-        // Back-compat: accept legacy skill.yaml from older repos.
-        srcSkillYaml = srcLegacyYaml;
-        await fs.access(srcSkillYaml);
-      }
-      await fs.access(srcSkillMd);
-    } catch {
-      throw new Error(`Missing .x_skill.yaml (or legacy skill.yaml) or SKILL.md at sourcePath: ${item.sourcePath}`);
+
+    // Only require SKILL.md to exist
+    if (!(await pathExists(srcSkillMd))) {
+      throw new Error(`Missing SKILL.md at sourcePath: ${item.sourcePath}`);
     }
 
-    let metaRaw = await fs.readFile(srcSkillYaml, "utf8");
-    let meta = YAML.parse(metaRaw);
-    if (!meta || typeof meta !== "object" || typeof meta.id !== "string" || !meta.id) {
-      throw new Error(`Invalid manifest (missing id): ${item.sourcePath}/${path.basename(srcSkillYaml)}`);
-    }
-    let skillId = meta.id;
-    assertSlug("manifest id", skillId);
-
-    let destSkillDir = path.join("skills", item.targetCategory, item.targetSubcategory, skillId);
+    let destSkillDir = path.join("skills", item.targetCategory, item.targetSubcategory, item.id);
     if (await pathExists(destSkillDir)) throw new Error(`Destination already exists: ${destSkillDir}`);
 
     let limits = { files: 0, bytes: 0, maxFiles: 2500, maxBytes: 50 * 1024 * 1024 };
     await copyDirChecked(srcSkillDir, destSkillDir, limits);
 
-    // Normalize metadata filename in the registry repo.
-    let destManifest = path.join(destSkillDir, ".x_skill.yaml");
-    let destLegacy = path.join(destSkillDir, "skill.yaml");
-    if (!(await pathExists(destManifest)) && (await pathExists(destLegacy))) {
-      await fs.rename(destLegacy, destManifest);
-    }
-    if (await pathExists(destLegacy)) {
-      // If both exist, or rename didn't happen for any reason, keep only the canonical filename.
-      await fs.rm(destLegacy);
-    }
-
-    // Inject/overwrite source provenance and metadata from issue.
-    meta.source = {
-      ...(meta.source ?? {}),
-      repo: req.sourceRepo,
-      path: item.sourcePath,
-      ref: req.ref,
-      commit
+    // Generate .x_skill.yaml from issue content
+    let meta = {
+      specVersion: 1,
+      id: item.id,
+      title: item.title,
+      description: item.description,
+      tags: item.tags.length > 0 ? item.tags : undefined,
+      agents: item.agents.length > 0 ? item.agents : undefined,
+      links: {
+        docs: "./SKILL.md"
+      },
+      source: {
+        repo: req.sourceRepo,
+        path: item.sourcePath,
+        ref: req.ref,
+        commit
+      }
     };
 
-    // Add title from issue if provided and not already set
-    if (item.title && !meta.title) {
-      meta.title = item.title;
-    }
+    // Remove undefined fields
+    Object.keys(meta).forEach(key => {
+      if (meta[key] === undefined) delete meta[key];
+    });
 
-    // Add tags from issue (merge with existing)
-    if (item.tags && item.tags.length > 0) {
-      const existingTags = Array.isArray(meta.tags) ? meta.tags : [];
-      const allTags = [...new Set([...existingTags, ...item.tags])];
-      meta.tags = allTags;
-    }
-
+    let destManifest = path.join(destSkillDir, ".x_skill.yaml");
     await fs.writeFile(destManifest, YAML.stringify(meta), "utf8");
 
-    imported.push({ id: skillId, dest: destSkillDir, sourcePath: item.sourcePath });
+    imported.push({ id: item.id, dest: destSkillDir, sourcePath: item.sourcePath });
   }
 
   console.log(`Imported ${imported.length} skill(s):`);
