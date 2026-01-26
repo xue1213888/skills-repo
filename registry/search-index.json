@@ -1,6 +1,6 @@
 {
   "specVersion": 1,
-  "generatedAt": "2026-01-26T10:57:55.583Z",
+  "generatedAt": "2026-01-26T11:11:39.055Z",
   "docs": [
     {
       "id": "ask-questions-if-underspecified",
@@ -170,6 +170,15 @@
       "tags": [],
       "agents": [],
       "text": "PDF Processing Guide\nComprehensive PDF manipulation toolkit for extracting text and tables, creating new PDFs, merging/splitting documents, and handling forms. When Claude needs to fill in a PDF form or programmatically process, generate, or analyze PDF documents at scale.\n## Overview"
+    },
+    {
+      "id": "unknown",
+      "category": "documentation",
+      "subcategory": "knowledge-base",
+      "title": "Agent Skills for Context Engineering",
+      "tags": [],
+      "agents": [],
+      "text": "Agent Skills for Context Engineering\nA comprehensive collection of Agent Skills for context engineering, multi-agent architectures, and production agent systems. Use when building, optimizing, or debugging agent systems that require effective context management.\nThis collection provides structured guidance for building production-grade AI agent systems through effective context engineering."
     },
     {
       "id": "doc-coauthoring",

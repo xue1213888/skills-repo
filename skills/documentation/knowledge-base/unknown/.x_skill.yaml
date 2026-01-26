@@ -1,0 +1,14 @@
+specVersion: 1
+id: unknown
+title: Agent Skills for Context Engineering
+description: A comprehensive collection of Agent Skills for context engineering,
+  multi-agent architectures, and production agent systems. Use when building,
+  optimizing, or debugging agent systems that require effective context
+  management.
+links:
+  docs: ./SKILL.md
+source:
+  repo: https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering
+  path: .
+  ref: main
+  commit: 1bda9bd46e28d344dc260f476258423e7c06ccf3

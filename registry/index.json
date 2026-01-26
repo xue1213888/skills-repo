@@ -1,6 +1,6 @@
 {
   "specVersion": 1,
-  "generatedAt": "2026-01-26T10:57:55.583Z",
+  "generatedAt": "2026-01-26T11:11:39.055Z",
   "skills": [
     {
       "specVersion": 1,
@@ -1582,6 +1582,939 @@
         },
         {
           "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "unknown",
+      "title": "Agent Skills for Context Engineering",
+      "description": "A comprehensive collection of Agent Skills for context engineering, multi-agent architectures, and production agent systems. Use when building, optimizing, or debugging agent systems that require effective context management.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering",
+        "path": ".",
+        "ref": "main",
+        "commit": "1bda9bd46e28d344dc260f476258423e7c06ccf3"
+      },
+      "category": "documentation",
+      "subcategory": "knowledge-base",
+      "repoPath": "skills/documentation/knowledge-base/unknown",
+      "summary": "This collection provides structured guidance for building production-grade AI agent systems through effective context engineering.",
+      "files": [
+        {
+          "path": "CONTRIBUTING.md",
+          "kind": "file"
+        },
+        {
+          "path": "docs/agentskills.md",
+          "kind": "file"
+        },
+        {
+          "path": "docs/blogs.md",
+          "kind": "file"
+        },
+        {
+          "path": "docs/claude_research.md",
+          "kind": "file"
+        },
+        {
+          "path": "docs/compression.md",
+          "kind": "file"
+        },
+        {
+          "path": "docs/gemini_research.md",
+          "kind": "file"
+        },
+        {
+          "path": "docs/hncapsule.md",
+          "kind": "file"
+        },
+        {
+          "path": "docs/netflix_context.md",
+          "kind": "file"
+        },
+        {
+          "path": "docs/vercel_tool.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/book-sft-pipeline/examples/gertrude-stein/dataset_sample.jsonl",
+          "kind": "file"
+        },
+        {
+          "path": "examples/book-sft-pipeline/examples/gertrude-stein/pangram/Screenshot 2025-12-27 at 3.05.04 AM.png",
+          "kind": "file"
+        },
+        {
+          "path": "examples/book-sft-pipeline/examples/gertrude-stein/pangram/Screenshot 2025-12-27 at 3.05.36 AM.png",
+          "kind": "file"
+        },
+        {
+          "path": "examples/book-sft-pipeline/examples/gertrude-stein/pangram/Screenshot 2025-12-27 at 3.07.18 AM.png",
+          "kind": "file"
+        },
+        {
+          "path": "examples/book-sft-pipeline/examples/gertrude-stein/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/book-sft-pipeline/examples/gertrude-stein/sample_outputs.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/book-sft-pipeline/examples/gertrude-stein/training_config.json",
+          "kind": "file"
+        },
+        {
+          "path": "examples/book-sft-pipeline/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/book-sft-pipeline/references/segmentation-strategies.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/book-sft-pipeline/references/tinker-format.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/book-sft-pipeline/references/tinker.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/book-sft-pipeline/scripts/pipeline_example.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/book-sft-pipeline/SKILL.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/AGENT.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/agents/AGENTS.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/agents/scripts/content_ideas.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/agents/scripts/idea_to_draft.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/agents/scripts/stale_contacts.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/agents/scripts/weekly_review.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/content/calendar.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/content/CONTENT.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/content/engagement.jsonl",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/content/ideas.jsonl",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/content/posts.jsonl",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/content/templates/linkedin-post.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/content/templates/newsletter.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/content/templates/thread.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/examples/content-workflow.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/examples/meeting-prep.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/HOW-SKILLS-BUILT-THIS.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/identity/bio-variants.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/identity/brand.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/identity/IDENTITY.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/identity/prompts/content-generation.xml",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/identity/prompts/reply-generator.xml",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/identity/values.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/identity/voice.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/knowledge/bookmarks.jsonl",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/knowledge/competitors.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/knowledge/KNOWLEDGE.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/knowledge/learning.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/knowledge/research/_template.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/network/circles.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/network/contacts.jsonl",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/network/interactions.jsonl",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/network/intros.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/network/NETWORK.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/operations/goals.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/operations/meetings.jsonl",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/operations/metrics.jsonl",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/operations/OPERATIONS.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/operations/reviews/_weekly_template.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/operations/todos.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/package.json",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/references/file-formats.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/scripts/install.sh",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/SKILL.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/digital-brain-skill/SKILLS-MAPPING.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/docs/agentthinking.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/docs/interleavedthinking.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/docs/m2-1.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/examples/01_basic_capture.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/examples/02_tool_usage.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/examples/03_full_optimization.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/generated_skills/comprehensive-research-agent/references/optimization_summary.json",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/generated_skills/comprehensive-research-agent/references/optimized_prompt.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/generated_skills/comprehensive-research-agent/references/patterns_found.json",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/generated_skills/comprehensive-research-agent/SKILL.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/final_prompt.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_1/analysis.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_1/optimization.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_1/optimized_prompt.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_1/trace.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_10/analysis.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_10/trace.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_2/analysis.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_2/optimization.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_2/optimized_prompt.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_2/trace.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_3/analysis.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_3/optimization.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_3/optimized_prompt.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_3/trace.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_4/analysis.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_4/optimization.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_4/optimized_prompt.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_4/trace.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_5/analysis.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_5/optimization.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_5/optimized_prompt.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_5/trace.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_6/analysis.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_6/optimization.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_6/optimized_prompt.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_6/trace.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_7/analysis.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_7/optimization.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_7/optimized_prompt.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_7/trace.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_8/analysis.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_8/optimization.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_8/optimized_prompt.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_8/trace.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_9/analysis.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_9/optimization.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_9/optimized_prompt.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/iteration_9/trace.txt",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/optimization_artifacts/summary.json",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/pyproject.toml",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/reasoning_trace_optimizer/__init__.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/reasoning_trace_optimizer/analyzer.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/reasoning_trace_optimizer/capture.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/reasoning_trace_optimizer/cli.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/reasoning_trace_optimizer/loop.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/reasoning_trace_optimizer/models.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/reasoning_trace_optimizer/optimizer.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/reasoning_trace_optimizer/skill_generator.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/SKILL.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/tests/__init__.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/interleaved_thinking/tests/test_models.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/agents/evaluator-agent/evaluator-agent.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/agents/index.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/agents/orchestrator-agent/orchestrator-agent.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/agents/research-agent/research-agent.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/CONTRIBUTING.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/env.example",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/eslint.config.js",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/examples/basic-evaluation.ts",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/examples/full-evaluation-workflow.ts",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/examples/generate-rubric.ts",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/examples/pairwise-comparison.ts",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/LICENSE",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/package.json",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/prompts/agent-system/orchestrator-prompt.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/prompts/evaluation/direct-scoring-prompt.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/prompts/evaluation/pairwise-comparison-prompt.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/prompts/index.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/prompts/research/research-synthesis-prompt.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/skills/context-fundamentals/context-fundamentals.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/skills/index.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/skills/llm-evaluator/llm-evaluator.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/skills/tool-design/tool-design.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/src/agents/evaluator.ts",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/src/agents/index.ts",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/src/config/index.ts",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/src/index.ts",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/src/tools/evaluation/direct-score.ts",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/src/tools/evaluation/generate-rubric.ts",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/src/tools/evaluation/index.ts",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/src/tools/evaluation/pairwise-compare.ts",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/tests/evaluation.test.ts",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/tests/setup.ts",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/tests/skills.test.ts",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/tools/evaluation/direct-score.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/tools/evaluation/generate-rubric.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/tools/evaluation/pairwise-compare.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/tools/index.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/tools/orchestration/delegate-to-agent.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/tools/research/read-url.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/tools/research/web-search.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/tsconfig.json",
+          "kind": "file"
+        },
+        {
+          "path": "examples/llm-as-judge-skills/vitest.config.ts",
+          "kind": "file"
+        },
+        {
+          "path": "examples/x-to-book-system/PRD.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/x-to-book-system/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/x-to-book-system/SKILLS-MAPPING.md",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE",
+          "kind": "file"
+        },
+        {
+          "path": "README.md",
+          "kind": "file"
+        },
+        {
+          "path": "researcher/example_output.md",
+          "kind": "file"
+        },
+        {
+          "path": "researcher/llm-as-a-judge.md",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/advanced-evaluation/references/bias-mitigation.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/advanced-evaluation/references/implementation-patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/advanced-evaluation/references/metrics-guide.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/advanced-evaluation/scripts/evaluation_example.py",
+          "kind": "file"
+        },
+        {
+          "path": "skills/advanced-evaluation/SKILL.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/bdi-mental-states/references/bdi-ontology-core.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/bdi-mental-states/references/framework-integration.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/bdi-mental-states/references/rdf-examples.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/bdi-mental-states/references/sparql-competency.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/bdi-mental-states/SKILL.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/context-compression/references/evaluation-framework.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/context-compression/scripts/compression_evaluator.py",
+          "kind": "file"
+        },
+        {
+          "path": "skills/context-compression/SKILL.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/context-degradation/references/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/context-degradation/scripts/degradation_detector.py",
+          "kind": "file"
+        },
+        {
+          "path": "skills/context-degradation/SKILL.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/context-fundamentals/references/context-components.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/context-fundamentals/scripts/context_manager.py",
+          "kind": "file"
+        },
+        {
+          "path": "skills/context-fundamentals/SKILL.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/context-optimization/references/optimization_techniques.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/context-optimization/scripts/compaction.py",
+          "kind": "file"
+        },
+        {
+          "path": "skills/context-optimization/SKILL.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/evaluation/references/metrics.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/evaluation/scripts/evaluator.py",
+          "kind": "file"
+        },
+        {
+          "path": "skills/evaluation/SKILL.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/filesystem-context/references/implementation-patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/filesystem-context/scripts/filesystem_context.py",
+          "kind": "file"
+        },
+        {
+          "path": "skills/filesystem-context/SKILL.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/hosted-agents/references/infrastructure-patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/hosted-agents/scripts/sandbox_manager.py",
+          "kind": "file"
+        },
+        {
+          "path": "skills/hosted-agents/SKILL.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/memory-systems/references/implementation.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/memory-systems/scripts/memory_store.py",
+          "kind": "file"
+        },
+        {
+          "path": "skills/memory-systems/SKILL.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/multi-agent-patterns/references/frameworks.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/multi-agent-patterns/scripts/coordination.py",
+          "kind": "file"
+        },
+        {
+          "path": "skills/multi-agent-patterns/SKILL.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/project-development/references/case-studies.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/project-development/references/pipeline-patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/project-development/scripts/pipeline_template.py",
+          "kind": "file"
+        },
+        {
+          "path": "skills/project-development/SKILL.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/tool-design/references/architectural_reduction.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/tool-design/references/best_practices.md",
+          "kind": "file"
+        },
+        {
+          "path": "skills/tool-design/scripts/description_generator.py",
+          "kind": "file"
+        },
+        {
+          "path": "skills/tool-design/SKILL.md",
+          "kind": "file"
+        },
+        {
+          "path": "template/SKILL.md",
           "kind": "file"
         }
       ]
