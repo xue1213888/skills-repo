@@ -3,6 +3,7 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 
+import fg from "fast-glob";
 import YAML from "yaml";
 
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
