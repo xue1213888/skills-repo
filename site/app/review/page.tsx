@@ -12,7 +12,7 @@ type ReviewItem = {
   targetCategory: string;
   targetSubcategory: string;
   tags: string[];
-  agents: string[];
+  isUpdate?: boolean;
 };
 
 type ReviewData = {
@@ -127,13 +127,18 @@ function ReviewContent() {
                   <span className="px-2 py-0.5 rounded text-xs font-mono text-muted bg-background-secondary border border-border">
                     {item.id}
                   </span>
+                  {item.isUpdate && (
+                    <span className="px-2 py-0.5 rounded text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800">
+                      Update
+                    </span>
+                  )}
                 </div>
 
                 {item.description && (
                   <p className="text-secondary mt-2">{item.description}</p>
                 )}
 
-                <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {/* Source Path */}
                   <div className="p-3 bg-background-secondary rounded-lg">
                     <div className="text-xs font-medium text-muted mb-1">Source Path</div>
@@ -146,25 +151,6 @@ function ReviewContent() {
                     <code className="text-accent font-mono text-sm">
                       {item.targetCategory}/{item.targetSubcategory}
                     </code>
-                  </div>
-
-                  {/* Agents */}
-                  <div className="p-3 bg-background-secondary rounded-lg">
-                    <div className="text-xs font-medium text-muted mb-1">Supported Agents</div>
-                    {item.agents.length > 0 ? (
-                      <div className="flex flex-wrap gap-1">
-                        {item.agents.map((agent) => (
-                          <span
-                            key={agent}
-                            className="px-1.5 py-0.5 rounded text-xs bg-card border border-border"
-                          >
-                            {agent}
-                          </span>
-                        ))}
-                      </div>
-                    ) : (
-                      <span className="text-muted text-sm">Not specified</span>
-                    )}
                   </div>
                 </div>
 

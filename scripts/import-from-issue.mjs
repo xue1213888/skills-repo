@@ -69,13 +69,12 @@ function parseRequest(issueBody) {
     assertSlug(`items[${idx}].id`, id);
 
     let title = typeof it.title === "string" ? it.title.trim() : id;
-    let description = typeof it.description === "string" ? it.description.trim() : "";
 
     // Optional fields
     let tags = Array.isArray(it.tags) ? it.tags.filter(t => typeof t === "string" && t.trim()).map(t => t.trim()) : [];
-    let agents = Array.isArray(it.agents) ? it.agents.filter(a => typeof a === "string" && a.trim()).map(a => a.trim()) : [];
+    let isUpdate = it.isUpdate === true || it.isUpdate === "true";
 
-    return { sourcePath, targetCategory, targetSubcategory, id, title, description, tags, agents };
+    return { sourcePath, targetCategory, targetSubcategory, id, title, tags, isUpdate };
   });
 
   return {
@@ -162,7 +161,16 @@ async function main() {
     }
 
     let destSkillDir = path.join("skills", item.targetCategory, item.targetSubcategory, item.id);
-    if (await pathExists(destSkillDir)) throw new Error(`Destination already exists: ${destSkillDir}`);
+
+    // Handle update vs new
+    if (await pathExists(destSkillDir)) {
+      if (item.isUpdate) {
+        console.log(`Updating existing skill: ${destSkillDir}`);
+        await fs.rm(destSkillDir, { recursive: true });
+      } else {
+        throw new Error(`Destination already exists: ${destSkillDir}. Set isUpdate: true to update.`);
+      }
+    }
 
     let limits = { files: 0, bytes: 0, maxFiles: 2500, maxBytes: 50 * 1024 * 1024 };
     await copyDirChecked(srcSkillDir, destSkillDir, limits);
@@ -172,9 +180,7 @@ async function main() {
       specVersion: 1,
       id: item.id,
       title: item.title,
-      description: item.description,
       tags: item.tags.length > 0 ? item.tags : undefined,
-      agents: item.agents.length > 0 ? item.agents : undefined,
       links: {
         docs: "./SKILL.md"
       },
@@ -194,11 +200,11 @@ async function main() {
     let destManifest = path.join(destSkillDir, ".x_skill.yaml");
     await fs.writeFile(destManifest, YAML.stringify(meta), "utf8");
 
-    imported.push({ id: item.id, dest: destSkillDir, sourcePath: item.sourcePath });
+    imported.push({ id: item.id, dest: destSkillDir, sourcePath: item.sourcePath, isUpdate: item.isUpdate });
   }
 
   console.log(`Imported ${imported.length} skill(s):`);
-  for (let i of imported) console.log(`- ${i.id} -> ${i.dest} (from ${i.sourcePath})`);
+  for (let i of imported) console.log(`- ${i.id} -> ${i.dest} (from ${i.sourcePath})${i.isUpdate ? " [UPDATE]" : ""}`);
 }
 
 await main();
