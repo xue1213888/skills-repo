@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-import { REPO_URL } from "@/lib/config";
+import { REPO_URL, REPO_SLUG } from "@/lib/config";
 
 import { CommandBlockClient } from "@/components/CommandBlockClient";
 
@@ -42,6 +42,7 @@ const AGENTS = [
 ];
 
 type InstallScope = "project" | "global";
+type InstallMethod = "npx" | "curl";
 
 export function QuickInstallClient({
   skillId,
@@ -56,48 +57,90 @@ export function QuickInstallClient({
   const defaultAgent = declaredAgents?.find((a) => AGENTS.some((x) => x.id === a)) ?? "codex";
   const [agent, setAgent] = useState(defaultAgent);
   const [scope, setScope] = useState<InstallScope>("project");
+  const [method, setMethod] = useState<InstallMethod>("npx");
 
   const agentConfig = AGENTS.find((a) => a.id === agent) ?? AGENTS[0];
   const targetDir = scope === "project" ? agentConfig.projectDir : agentConfig.globalDir;
 
   // Generate the installation command
-  // The command clones/downloads the skill files (excluding .x_skill.yaml) to the target directory
   const cmd = useMemo(() => {
-    if (!REPO_URL) {
+    if (!REPO_URL || !REPO_SLUG) {
       return `# Registry URL not configured`;
     }
 
-    // Extract owner/repo from REPO_URL
-    const repoMatch = REPO_URL.match(/github\.com\/([^/]+\/[^/]+)/);
-    const repoSlug = repoMatch ? repoMatch[1] : "owner/repo";
+    if (method === "npx") {
+      // NPX method using GitHub
+      const scopeFlag = scope === "global" ? " --scope global" : "";
+      return `# Install ${skillId} to ${targetDir}
+npx github:${REPO_SLUG} add ${skillId} --agent ${agent}${scopeFlag}`;
+    } else {
+      // Curl + tar method
+      const repoSlugFormatted = REPO_SLUG.replace('/', '-');
+      const skillPath = repoPath || `skills/${skillId}`;
+      const pathParts = skillPath.split('/').filter(Boolean);
+      const stripComponents = pathParts.length + 1;
 
-    // The skill path in the repository
-    const skillPath = repoPath || `skills/${skillId}`;
+      const commands = [
+        `# Install ${skillId} to ${targetDir}`,
+        `mkdir -p "${targetDir}/${skillId}"`,
+        `curl -sL "${REPO_URL}/archive/refs/heads/main.tar.gz" | \\`,
+        `  tar -xz --strip-components=${stripComponents} \\`,
+        `  "${repoSlugFormatted}-main/${skillPath}" \\`,
+        `  --exclude=".x_skill.yaml" \\`,
+        `  -C "${targetDir}/${skillId}/"`,
+      ];
 
-    // Calculate strip-components based on path depth
-    // For paths like "skills/category/subcategory/skill-name", we need to strip 5 components
-    // (repo-name/skills/category/subcategory/skill-name) to get the skill files
-    const pathParts = skillPath.split('/').filter(Boolean);
-    const stripComponents = pathParts.length + 1; // +1 for repo root directory in tarball
-
-    // Generate a curl + tar command to download and extract the skill
-    // This downloads only the skill directory, excludes .x_skill.yaml
-    // Using archive URL instead of API tarball for more predictable extraction
-    const commands = [
-      `# Install ${skillId} to ${targetDir}`,
-      `mkdir -p "${targetDir}/${skillId}"`,
-      `curl -sL "${REPO_URL}/archive/refs/heads/main.tar.gz" | \\`,
-      `  tar -xz --strip-components=${stripComponents} \\`,
-      `  "${repoSlug.replace('/', '-')}-main/${skillPath}" \\`,
-      `  --exclude=".x_skill.yaml" \\`,
-      `  -C "${targetDir}/${skillId}/"`,
-    ];
-
-    return commands.join("\n");
-  }, [skillId, repoPath, targetDir]);
+      return commands.join("\n");
+    }
+  }, [skillId, repoPath, targetDir, agent, scope, method]);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+      {/* Method selector */}
+      <div>
+        <label className="text-foreground" style={{ display: "block", fontSize: "14px", fontWeight: 500, marginBottom: "8px" }}>
+          Method
+        </label>
+        <div style={{ display: "flex", gap: "8px" }}>
+          <button
+            type="button"
+            onClick={() => setMethod("npx")}
+            className={method === "npx" ? "bg-accent" : "bg-background-secondary border-border"}
+            style={{
+              flex: 1,
+              padding: "8px 12px",
+              borderRadius: "8px",
+              border: method === "npx" ? "none" : "1px solid var(--color-border)",
+              color: method === "npx" ? "white" : "var(--color-text)",
+              fontWeight: 500,
+              fontSize: "14px",
+              cursor: "pointer",
+              transition: "all 150ms",
+            }}
+          >
+            NPX (Recommended)
+          </button>
+          <button
+            type="button"
+            onClick={() => setMethod("curl")}
+            className={method === "curl" ? "bg-accent" : "bg-background-secondary border-border"}
+            style={{
+              flex: 1,
+              padding: "8px 12px",
+              borderRadius: "8px",
+              border: method === "curl" ? "none" : "1px solid var(--color-border)",
+              color: method === "curl" ? "white" : "var(--color-text)",
+              fontWeight: 500,
+              fontSize: "14px",
+              cursor: "pointer",
+              transition: "all 150ms",
+            }}
+          >
+            One-Line Curl
+          </button>
+        </div>
+      </div>
+
       {/* Agent selector */}
       <div>
         <label className="text-foreground" style={{ display: "block", fontSize: "14px", fontWeight: 500, marginBottom: "8px" }}>
@@ -198,8 +241,17 @@ export function QuickInstallClient({
 
       {/* Note */}
       <p className="text-muted" style={{ fontSize: "12px", margin: 0, lineHeight: 1.5 }}>
-        This copies the skill files to the {scope === "project" ? "project" : "global"} skills directory for {agentConfig.label}.
-        The <code className="text-accent" style={{ fontSize: "11px", padding: "1px 4px", borderRadius: "4px", backgroundColor: "var(--color-accent-muted)" }}>.x_skill.yaml</code> file is excluded (internal metadata).
+        {method === "npx" ? (
+          <>
+            Uses <code className="text-accent" style={{ fontSize: "11px", padding: "1px 4px", borderRadius: "4px", backgroundColor: "var(--color-accent-muted)" }}>npx</code> to install directly from GitHub.
+            No npm installation required. The <code className="text-accent" style={{ fontSize: "11px", padding: "1px 4px", borderRadius: "4px", backgroundColor: "var(--color-accent-muted)" }}>.x_skill.yaml</code> file is excluded (internal metadata).
+          </>
+        ) : (
+          <>
+            This copies the skill files to the {scope === "project" ? "project" : "global"} skills directory for {agentConfig.label}.
+            The <code className="text-accent" style={{ fontSize: "11px", padding: "1px 4px", borderRadius: "4px", backgroundColor: "var(--color-accent-muted)" }}>.x_skill.yaml</code> file is excluded (internal metadata).
+          </>
+        )}
       </p>
     </div>
   );

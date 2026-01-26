@@ -6,9 +6,37 @@ This repository provides multiple ways to install agent skills to your local dev
 
 ## Installation Methods
 
-### Method 1: One-Line Install (Recommended)
+### Method 1: NPX Command (Recommended)
 
-The simplest way to install a skill is using the provided one-line command. This method downloads the skill files directly from GitHub and places them in the appropriate directory.
+The easiest way to install skills is using npx, which requires no setup:
+
+```bash
+# Option A: Use from GitHub directly (no npm install needed)
+npx github:xue1213888/skills-repo add ui-ux-pro-max --agent claude --scope project
+
+# Option B: Use from npm (after published)
+npx aiskill add ui-ux-pro-max --agent claude --scope project
+
+# List all available skills
+npx github:xue1213888/skills-repo list
+
+# Remove a skill
+npx github:xue1213888/skills-repo remove ui-ux-pro-max --agent claude --scope project
+```
+
+**What it does:**
+1. Automatically downloads the skill from the registry
+2. Installs to the correct agent directory
+3. Excludes internal metadata (`.x_skill.yaml`)
+4. Works with any agent without configuration
+
+**Available options:**
+- `--agent`: Target agent (claude, codex, opencode, cursor, antigravity)
+- `--scope`: Installation scope (project, global)
+
+### Method 2: One-Line Install
+
+For direct installation without npx, use this curl command:
 
 **Example:**
 ```bash
@@ -27,24 +55,6 @@ curl -sL "https://github.com/xue1213888/skills-repo/archive/refs/heads/main.tar.
 3. Extracts only the specific skill files
 4. Excludes internal metadata (`.x_skill.yaml`)
 
-### Method 2: CLI Tool
-
-Use the included CLI tool for a more interactive experience:
-
-```bash
-# Install to project (current directory)
-node scripts/install-skill.mjs ui-ux-pro-max --agent claude --scope project
-
-# Install globally (user home directory)
-node scripts/install-skill.mjs ui-ux-pro-max --agent claude --scope global
-
-# List available skills
-node scripts/install-skill.mjs --list
-
-# Get help
-node scripts/install-skill.mjs --help
-```
-
 **Supported Agents:**
 - `claude` - Claude Code
 - `codex` - Codex
@@ -58,9 +68,9 @@ node scripts/install-skill.mjs --help
 
 ### Method 3: Manual Installation
 
-1. Navigate to the [Skills Registry](https://your-site.com)
+1. Navigate to the Skills Registry website
 2. Browse or search for the skill you want
-3. Click on the skill card
+3. Click on the skill card to view details
 4. Copy the install command from the skill detail page
 5. Run the command in your terminal
 
@@ -101,10 +111,11 @@ The `.x_skill.yaml` file is **excluded** as it's internal metadata used only by 
 After installation, verify the skill was installed correctly:
 
 ```bash
-# Check if skill directory exists
-ls -la .claude/skills/skill-name/
+# Using npx
+npx aiskill list
 
-# View the skill documentation
+# Or check manually
+ls -la .claude/skills/skill-name/
 cat .claude/skills/skill-name/SKILL.md
 ```
 
@@ -130,7 +141,17 @@ curl -v "https://github.com/xue1213888/skills-repo/archive/refs/heads/main.tar.g
 
 ## Advanced Usage
 
+### Using environment variables
+
+```bash
+# Set custom registry
+export SKILL_REGISTRY_URL=https://github.com/your-org/your-skills-repo
+npx aiskill add skill-name
+```
+
 ### Install from a specific branch or commit
+
+For direct curl method, replace 'main' with your branch/tag/commit:
 
 ```bash
 # Replace 'main' with your branch/tag/commit
@@ -146,8 +167,23 @@ curl -sL "https://github.com/xue1213888/skills-repo/archive/refs/heads/develop.t
 ```bash
 # Install multiple skills at once
 for skill in "skill-1" "skill-2" "skill-3"; do
-  node scripts/install-skill.mjs "$skill" --agent claude
+  npx aiskill add "$skill" --agent claude --scope project
 done
+```
+
+## Publishing to NPM
+
+To publish the CLI tool to npm:
+
+```bash
+# Login to npm (first time only)
+npm login
+
+# Publish the package
+npm publish
+
+# After publishing, users can install directly
+npx aiskill add <skill-name>
 ```
 
 ## Contributing

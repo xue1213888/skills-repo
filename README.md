@@ -1,4 +1,4 @@
-# Skills Registry (WIP)
+# Skills Registry
 
 Open-source repository for managing a community skills registry:
 
@@ -6,7 +6,29 @@ Open-source repository for managing a community skills registry:
 - per-skill registry metadata: `.x_skill.yaml` (structured, repo-managed) + `SKILL.md` (human instructions)
 - static site (Next.js static export) for browsing/searching skills + importer UI
 - importer: paste a GitHub repo URL -> select skills -> open an import issue -> GitHub Action opens a PR
-- Node.js CLI (planned) to install skills into agent CLIs (codex / claude code / gemini cli / opencode / ...)
+- **NPX CLI tool** to install skills into agent CLIs (claude, codex, opencode, cursor, antigravity)
+
+## Quick Start
+
+### Install a Skill
+
+```bash
+# Install a skill using npx from GitHub (no npm install needed)
+npx github:xue1213888/skills-repo add ui-ux-pro-max --agent claude --scope project
+
+# List all available skills
+npx github:xue1213888/skills-repo list
+
+# Remove a skill
+npx github:xue1213888/skills-repo remove ui-ux-pro-max
+```
+
+**Alternative:** If published to npm, you can use the shorter command:
+```bash
+npx aiskill add ui-ux-pro-max --agent claude --scope project
+```
+
+See [INSTALL.md](INSTALL.md) for detailed installation instructions.
 
 Design + architecture spec:
 
@@ -19,6 +41,7 @@ Design + architecture spec:
 skills/      # source of truth: community skills
 schemas/     # JSON Schemas (.x_skill.yaml)
 scripts/     # build/validate utilities
+cli/         # npx CLI tool (aiskill command)
 site/        # Next.js static site
 docs/        # RFCs and contributor docs
 registry/    # generated indexes for the site/tooling
@@ -45,7 +68,14 @@ npm install
 npm run validate
 npm run build:registry
 
+# configure site environment variables
+cd site
+cp .env.example .env.local
+# Edit .env.local and set NEXT_PUBLIC_REPO_SLUG to your GitHub username/repo
+
 # run the Next.js site
-npm install --prefix site
-npm run dev --prefix site
+npm install
+npm run dev
 ```
+
+The site will be available at http://localhost:3000

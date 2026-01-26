@@ -1,0 +1,30 @@
+# Development files
+.git
+.github
+.vscode
+.DS_Store
+*.log
+node_modules
+
+# Site and docs
+site/
+docs/
+skills/
+.codex/
+
+# Scripts (keep only cli/)
+scripts/
+
+# Testing
+test/
+tests/
+*.test.js
+*.test.mjs
+
+# Build artifacts
+.next/
+out/
+dist/
+
+# Keep only necessary files for CLI
+# Include: cli/, registry/, package.json, README.md, INSTALL.md
