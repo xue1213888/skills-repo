@@ -46,10 +46,19 @@ jobs:
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: parseInt(issueNumber),
-                  body: `The related PR #${context.payload.pull_request.number} was closed without merging. This import request will not be processed.`
+                  body: `❌ The related PR #${context.payload.pull_request.number} was closed without merging. This import request will not be processed.`
                 });
 
-                console.log(`Added "wontfix" label to issue #${issueNumber}`);
+                // Close the issue as "Not planned"
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: parseInt(issueNumber),
+                  state: 'closed',
+                  state_reason: 'not_planned'
+                });
+
+                console.log(`Marked issue #${issueNumber} as "Not planned"`);
               } catch (error) {
                 console.error(`Failed to update issue #${issueNumber}:`, error);
               }

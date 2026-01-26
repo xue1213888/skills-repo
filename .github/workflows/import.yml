@@ -107,3 +107,12 @@ jobs:
               issue_number: context.issue.number,
               body: '❌ Import failed. Please check the workflow logs for details.\n\nWorkflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
             });
+
+            // Close the issue as "Not planned"
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed',
+              state_reason: 'not_planned'
+            });
