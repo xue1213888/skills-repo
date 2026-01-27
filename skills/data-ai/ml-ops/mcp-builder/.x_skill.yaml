@@ -6,7 +6,7 @@ description: Guide for creating high-quality MCP (Model Context Protocol)
   well-designed tools. Use when building MCP servers to integrate external APIs
   or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).
 createdAt: 2026-01-27T02:28:02.101Z
-updatedAt: 2026-01-27T02:28:02.101Z
+updatedAt: 2026-01-27T02:39:41.583Z
 links:
   docs: ./SKILL.md
 source:
