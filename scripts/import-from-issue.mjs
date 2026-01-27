@@ -197,6 +197,7 @@ async function main() {
   if (!issueBody.trim()) throw new Error("ISSUE_BODY is empty (workflow must pass github.event.issue.body)");
 
   let req = parseRequest(issueBody);
+  const now = new Date().toISOString();
 
   let tmp = await fs.mkdtemp(path.join(os.tmpdir(), "skillhub-import-"));
   let srcRepoDir = path.join(tmp, "source");
@@ -233,11 +234,25 @@ async function main() {
     }
 
     let destSkillDir = path.join("skills", item.targetCategory, item.targetSubcategory, item.id);
+    let existingCreatedAt;
 
     // If updating, find and remove any existing skill with the same ID (even in different category)
     if (item.isUpdate) {
       // Use fast-glob to find all skills with matching ID
       const existingSkills = await fg([`skills/*/*/${item.id}/.x_skill.yaml`], { onlyFiles: true, dot: true });
+
+      for (const existingPath of existingSkills) {
+        try {
+          const raw = await fs.readFile(existingPath, "utf8");
+          const existingMeta = YAML.parse(raw);
+          if (typeof existingMeta?.createdAt === "string" && existingMeta.createdAt.trim()) {
+            existingCreatedAt = existingMeta.createdAt.trim();
+            break;
+          }
+        } catch {
+          // ignore: best-effort preservation
+        }
+      }
 
       for (const existingPath of existingSkills) {
         const existingDir = existingPath.replace(/\/.x_skill\.yaml$/, "");
@@ -276,6 +291,8 @@ async function main() {
       id: item.id,
       title: item.title,
       description: description,
+      createdAt: existingCreatedAt ?? now,
+      updatedAt: now,
       tags: item.tags.length > 0 ? item.tags : undefined,
       links: {
         docs: "./SKILL.md"

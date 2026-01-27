@@ -3,6 +3,7 @@
 import { addCommand } from './commands/add.mjs';
 import { listCommand } from './commands/list.mjs';
 import { removeCommand } from './commands/remove.mjs';
+import { AGENTS } from "./lib/agents.mjs";
 import { getPackageVersion } from "./lib/config.mjs";
 
 const COMMANDS = {
@@ -12,6 +13,7 @@ const COMMANDS = {
 };
 
 function printHelp() {
+  const agentsList = Object.keys(AGENTS).join(", ");
   console.log(`
 aiskill - AI Agent Skills Manager
 
@@ -24,7 +26,7 @@ Commands:
   remove <skill-name>  Remove an installed skill
 
 Options:
-  --agent <name>       Target agent (claude, codex, opencode, cursor, antigravity)
+  --agent <name>       Target agent (${agentsList})
                        Default: claude
   --scope <scope>      Installation scope (project, global)
                        Default: project

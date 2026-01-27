@@ -5,6 +5,8 @@ description: Creates GitHub pull requests with properly formatted titles that
   pass the check-pr-title CI validation. Use when creating PRs, submitting
   changes for review, or when the user says /pr or asks to create a pull
   request.
+createdAt: 2026-01-27T02:28:02.101Z
+updatedAt: 2026-01-27T02:28:02.101Z
 tags:
   - github
 links:

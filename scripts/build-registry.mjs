@@ -1,8 +1,50 @@
 import fs from "node:fs/promises";
 
-import { buildSearchDocs, loadCategoriesFromRepo, scanSkills, writeJson } from "./lib/registry.mjs";
+import fg from "fast-glob";
+import YAML from "yaml";
+
+import { SKILL_YAML_GLOB, buildSearchDocs, loadCategoriesFromRepo, scanSkills, writeJson } from "./lib/registry.mjs";
 
 let generatedAt = new Date().toISOString();
+
+async function backfillSkillTimestamps(now) {
+  const skillYamlPaths = await fg([SKILL_YAML_GLOB], { onlyFiles: true, dot: true });
+  skillYamlPaths.sort((a, b) => a.localeCompare(b));
+
+  let updated = 0;
+  for (const skillYamlPath of skillYamlPaths) {
+    const raw = await fs.readFile(skillYamlPath, "utf8");
+    const meta = YAML.parse(raw);
+    if (!meta || typeof meta !== "object") continue;
+
+    const createdExisting = typeof meta.createdAt === "string" ? meta.createdAt.trim() : "";
+    const updatedExisting = typeof meta.updatedAt === "string" ? meta.updatedAt.trim() : "";
+    if (createdExisting && updatedExisting) continue;
+
+    const createdAt = createdExisting || now;
+    const updatedAt = updatedExisting || now;
+
+    const {
+      specVersion,
+      id,
+      title,
+      description,
+      createdAt: _createdAt,
+      updatedAt: _updatedAt,
+      ...rest
+    } = meta;
+
+    const next = { specVersion, id, title, description, createdAt, updatedAt, ...rest };
+    await fs.writeFile(skillYamlPath, YAML.stringify(next), "utf8");
+    updated += 1;
+  }
+
+  if (updated > 0) {
+    console.log(`Backfilled timestamps: ${updated} skill manifest(s)`);
+  }
+}
+
+await backfillSkillTimestamps(generatedAt);
 
 let { skills, errors } = await scanSkills({ includeFiles: true, includeSummary: true });
 if (errors.length > 0) {
@@ -40,6 +82,11 @@ await fs.mkdir("site/public/registry", { recursive: true });
 await writeJson("site/public/registry/index.json", index);
 await writeJson("site/public/registry/categories.json", categoriesJson);
 await writeJson("site/public/registry/search-index.json", searchIndex);
+try {
+  await fs.copyFile("registry/agents.json", "site/public/registry/agents.json");
+} catch {
+  // Optional file (agent install directory config)
+}
 
 // SEO assets (optional; emitted when SITE_URL is configured in CI).
 if (process.env.SITE_URL) {

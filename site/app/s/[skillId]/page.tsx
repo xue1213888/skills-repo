@@ -13,6 +13,7 @@ import { QuickInstallClient } from "@/components/QuickInstallClient";
 import { FileTreeClient } from "@/components/FileTreeClient";
 import { MarkdownCodeBlock } from "@/components/CodeBlock";
 import { REPO_URL } from "@/lib/config";
+import { loadAgentConfigs } from "@/lib/agents";
 import { getSkillById, loadRegistryIndex } from "@/lib/registry";
 
 export const dynamicParams = false;
@@ -461,6 +462,7 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
   const sourcePath = skill.source?.path ?? "";
   const sourceRef = skill.source?.ref ?? "";
   const sourceCommit = skill.source?.commit ?? "";
+  const agentConfigs = await loadAgentConfigs();
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(260px,320px)] gap-6 items-start">
@@ -556,7 +558,7 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
       </div>
 
       {/* Sidebar - mobile first, sticky on desktop */}
-      <aside className="min-w-0 space-y-4 order-1 lg:order-2 lg:sticky lg:top-[92px] lg:max-h-[calc(100vh-116px)] lg:overflow-y-auto">
+      <aside className="min-w-0 space-y-4 order-1 lg:order-2 lg:sticky lg:top-16 lg:max-h-[calc(100vh-88px)] lg:overflow-y-auto">
         {/* Quick install card */}
         <section className="p-5 bg-card border border-border rounded-xl">
           <h2 className="font-heading text-lg font-semibold text-foreground">Quick Install</h2>
@@ -564,7 +566,7 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
             Install this skill into a target agent.
           </p>
           <div className="mt-4">
-            <QuickInstallClient skillId={skill.id} repoPath={skill.repoPath} declaredAgents={skill.agents} />
+            <QuickInstallClient skillId={skill.id} declaredAgents={skill.agents} agentConfigs={agentConfigs} />
           </div>
         </section>
 
@@ -580,6 +582,18 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
               <dt className="font-mono text-xs text-muted w-20 shrink-0">path</dt>
               <dd className="text-sm font-medium text-foreground min-w-0 break-words">{skill.repoPath}</dd>
             </div>
+            {skill.createdAt ? (
+              <div className="flex items-baseline gap-3">
+                <dt className="font-mono text-xs text-muted w-20 shrink-0">createdAt</dt>
+                <dd className="text-sm font-medium text-foreground min-w-0 break-words">{skill.createdAt}</dd>
+              </div>
+            ) : null}
+            {skill.updatedAt ? (
+              <div className="flex items-baseline gap-3">
+                <dt className="font-mono text-xs text-muted w-20 shrink-0">updatedAt</dt>
+                <dd className="text-sm font-medium text-foreground min-w-0 break-words">{skill.updatedAt}</dd>
+              </div>
+            ) : null}
             {skill.license ? (
               <div className="flex items-baseline gap-3">
                 <dt className="font-mono text-xs text-muted w-20 shrink-0">license</dt>

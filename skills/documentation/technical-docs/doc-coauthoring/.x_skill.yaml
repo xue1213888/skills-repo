@@ -7,6 +7,8 @@ description: Guide users through a structured workflow for co-authoring
   helps users efficiently transfer context, refine content through iteration,
   and verify the doc works for readers. Trigger when user mentions writing docs,
   creating proposals, drafting specs, or similar documentation tasks.
+createdAt: 2026-01-27T02:28:02.101Z
+updatedAt: 2026-01-27T02:28:02.101Z
 links:
   docs: ./SKILL.md
 source:

@@ -38,6 +38,8 @@ export type RegistrySkill = {
   id: string;
   title: string;
   description: string;
+  createdAt?: string;
+  updatedAt?: string;
   license?: string;
   authors?: Array<{ name: string; url?: string; email?: string }>;
   tags?: string[];

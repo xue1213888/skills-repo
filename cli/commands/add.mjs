@@ -39,6 +39,7 @@ function parseArgs(args) {
 }
 
 function printHelp() {
+  const agentsList = Object.keys(AGENTS).join(", ");
   console.log(`
 Usage: npx aiskill add <skill-name> [options]
 
@@ -48,7 +49,7 @@ Arguments:
   <skill-name>         Name of the skill to install
 
 Options:
-  --agent <name>       Target agent (claude, codex, opencode, cursor, antigravity)
+  --agent <name>       Target agent (${agentsList})
                        Default: claude
   --scope <scope>      Installation scope (project, global)
                        Default: project
