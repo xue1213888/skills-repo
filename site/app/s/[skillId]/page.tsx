@@ -13,7 +13,7 @@ import { T } from "@/components/T";
 import { QuickInstallClient } from "@/components/QuickInstallClient";
 import { FileTreeClient } from "@/components/FileTreeClient";
 import { MarkdownCodeBlock } from "@/components/CodeBlock";
-import { REPO_URL } from "@/lib/config";
+import { REPO_REF, REPO_URL } from "@/lib/config";
 import type { MessageKey } from "@/lib/i18n";
 import { loadAgentConfigs } from "@/lib/agents";
 import { getSkillById, loadRegistryIndex } from "@/lib/registry";
@@ -378,11 +378,11 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
   const skillDir = path.resolve(process.cwd(), "..", skill.repoPath);
   const fileMetaList: FileMeta[] = [];
 
-  for (const p of filePaths) {
-    const name = p.split("/").pop() ?? p;
-    const ext = path.extname(p).toLowerCase();
-    const absPath = path.join(skillDir, p);
-    const githubUrl = REPO_URL ? `${REPO_URL}/blob/main/${skill.repoPath}/${p}` : "";
+	  for (const p of filePaths) {
+	    const name = p.split("/").pop() ?? p;
+	    const ext = path.extname(p).toLowerCase();
+	    const absPath = path.join(skillDir, p);
+	    const githubUrl = REPO_URL ? `${REPO_URL}/blob/${REPO_REF}/${skill.repoPath}/${p}` : "";
 
     let size = 0;
     try {

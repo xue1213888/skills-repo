@@ -44,6 +44,18 @@ function parseRepoUrl(input: string): { owner: string; repo: string } | null {
   let v = input.trim();
   if (!v) return null;
   v = v.replace(/^git\+/, "").replace(/\.git$/, "");
+
+  // Support common SSH forms like: git@github.com:owner/repo
+  const sshMatch = v.match(/^git@github\.com:([^/]+)\/(.+)$/);
+  if (sshMatch) {
+    const owner = sshMatch[1]?.trim();
+    const repo = sshMatch[2]?.split("/")[0]?.trim();
+    if (!owner || !repo) return null;
+    return { owner, repo };
+  }
+
+  // Support ssh://git@github.com/owner/repo
+  v = v.replace(/^ssh:\/\/git@github\.com\//, "");
   v = v.replace(/^https?:\/\/github\.com\//, "");
   v = v.replace(/^github\.com\//, "");
   v = v.replace(/^\/+|\/+$/g, "");

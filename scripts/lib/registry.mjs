@@ -8,6 +8,24 @@ import YAML from "yaml";
 
 export const SKILL_YAML_GLOB = "skills/*/*/*/.x_skill.yaml";
 
+const SKILL_FILE_IGNORE = [
+  "**/.git",
+  "**/.git/**",
+  "**/node_modules",
+  "**/node_modules/**",
+  "**/.next",
+  "**/.next/**",
+  "**/dist",
+  "**/dist/**",
+  "**/out",
+  "**/out/**",
+  "**/__pycache__",
+  "**/__pycache__/**",
+  "**/*.pyc",
+  "**/*.pyo",
+  "**/.DS_Store"
+];
+
 export function splitPath(p) {
   return p.replaceAll("\\", "/").split("/").filter(Boolean);
 }
@@ -118,20 +136,33 @@ export async function listSkillFiles(skillDir) {
     cwd: skillDir,
     onlyFiles: true,
     dot: false,
-    ignore: [
-      "**/.git/**",
-      "**/node_modules/**",
-      "**/.next/**",
-      "**/dist/**",
-      "**/out/**",
-      "**/__pycache__/**",
-      "**/*.pyc",
-      "**/*.pyo",
-      "**/.DS_Store"
-    ]
+    followSymbolicLinks: false,
+    ignore: SKILL_FILE_IGNORE
   });
   entries.sort((a, b) => a.localeCompare(b));
   return entries.map((p) => ({ path: p, kind: "file" }));
+}
+
+async function findSymlinksInDir(dir) {
+  const entries = await fg(["**/*"], {
+    cwd: dir,
+    onlyFiles: false,
+    dot: true,
+    followSymbolicLinks: false,
+    ignore: SKILL_FILE_IGNORE
+  });
+  entries.sort((a, b) => a.localeCompare(b));
+
+  const symlinks = [];
+  for (const rel of entries) {
+    try {
+      const st = await fs.lstat(path.join(dir, rel));
+      if (st.isSymbolicLink()) symlinks.push(rel);
+    } catch {
+      // Ignore racing/missing paths; validation should be best-effort.
+    }
+  }
+  return symlinks;
 }
 
 export async function scanSkills({ includeFiles = true, includeSummary = true } = {}) {
@@ -161,6 +192,14 @@ export async function scanSkills({ includeFiles = true, includeSummary = true } 
   for (let skillYamlPath of skillYamlPaths) {
     let { category, subcategory, skillId, skillDir } = parseSkillYamlPath(skillYamlPath);
     let skillMdPath = `${skillDir}/SKILL.md`;
+
+    const symlinks = await findSymlinksInDir(skillDir);
+    if (symlinks.length > 0) {
+      errors.push(
+        [`Symlinks are not allowed in skill directories: ${skillDir}`, ...symlinks.map((p) => `- ${p}`)].join("\n")
+      );
+      continue;
+    }
 
     let meta;
     try {
@@ -255,7 +294,7 @@ export async function loadCategoriesFromRepo(skills) {
   // Second, scan for all _category.yaml files to include empty categories
   const categoryFiles = await fg(["skills/*/_category.yaml"], { onlyFiles: true, dot: false });
   for (let categoryPath of categoryFiles) {
-    const parts = categoryPath.split("/");
+    const parts = splitPath(categoryPath);
     const catId = parts[1]; // skills/category-id/_category.yaml
 
     if (!categories.has(catId)) {
@@ -271,7 +310,7 @@ export async function loadCategoriesFromRepo(skills) {
   // Third, scan for all subcategory _category.yaml files
   const subcategoryFiles = await fg(["skills/*/*/_category.yaml"], { onlyFiles: true, dot: false });
   for (let subcatPath of subcategoryFiles) {
-    const parts = subcatPath.split("/");
+    const parts = splitPath(subcatPath);
     const catId = parts[1]; // skills/category-id/subcategory-id/_category.yaml
     const subId = parts[2];
 
