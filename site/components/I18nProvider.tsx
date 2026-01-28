@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
 
 import { DEFAULT_LOCALE, LOCALE_STORAGE_KEY, MESSAGES, formatMessage, isLocale, type Locale, type MessageKey } from "@/lib/i18n";
 
@@ -13,14 +14,27 @@ type I18nContextValue = {
 const I18nContext = createContext<I18nContextValue | null>(null);
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   const [locale, setLocaleState] = useState<Locale>(DEFAULT_LOCALE);
 
+  // Detect locale from URL path
   useEffect(() => {
-    const stored = window.localStorage.getItem(LOCALE_STORAGE_KEY) ?? "";
-    if (stored && isLocale(stored)) {
-      setLocaleState(stored);
+    const segments = pathname.split('/').filter(Boolean);
+    const firstSegment = segments[0];
+
+    // Check if first segment is a valid locale
+    if (firstSegment && isLocale(firstSegment)) {
+      setLocaleState(firstSegment as Locale);
+      // Sync to localStorage
+      window.localStorage.setItem(LOCALE_STORAGE_KEY, firstSegment);
+    } else {
+      // Default path (no locale prefix) - check localStorage
+      const stored = window.localStorage.getItem(LOCALE_STORAGE_KEY) ?? "";
+      if (stored && isLocale(stored)) {
+        setLocaleState(stored);
+      }
     }
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     document.documentElement.lang = locale;
@@ -29,6 +43,29 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
   const setLocale = useCallback((next: Locale) => {
     setLocaleState(next);
     window.localStorage.setItem(LOCALE_STORAGE_KEY, next);
+
+    // Navigate to the new locale
+    const segments = window.location.pathname.split('/').filter(Boolean);
+    const firstSegment = segments[0];
+
+    let newPath;
+    if (firstSegment && isLocale(firstSegment)) {
+      // Replace existing locale
+      segments[0] = next;
+      newPath = '/' + segments.join('/');
+    } else {
+      // Add locale prefix (unless it's default)
+      if (next === DEFAULT_LOCALE) {
+        newPath = window.location.pathname;
+      } else {
+        newPath = '/' + next + window.location.pathname;
+      }
+    }
+
+    // Navigate
+    if (newPath !== window.location.pathname) {
+      window.location.href = newPath;
+    }
   }, []);
 
   const t = useCallback(
@@ -49,4 +86,5 @@ export function useI18n() {
   if (!ctx) throw new Error("useI18n must be used within an I18nProvider");
   return ctx;
 }
+
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { REPO_URL, SITE_NAME } from "@/lib/config";
 import { useI18n } from "@/components/I18nProvider";
-import { LanguageSelect } from "@/components/LanguageSelect";
+import { LanguageSelector } from "@/components/LanguageSelector";
 import { ThemeToggle } from "./ThemeToggle";
 
 export function Header() {
@@ -75,8 +75,8 @@ export function Header() {
                 <span>{t("nav.github")}</span>
               </a>
             )}
-            <div className="hidden sm:block ml-1 sm:ml-2">
-              <LanguageSelect />
+            <div className="ml-1 sm:ml-2">
+              <LanguageSelector />
             </div>
             <div className="ml-1 sm:ml-2">
               <ThemeToggle />
