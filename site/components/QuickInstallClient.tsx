@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 
-import { REPO_REF, REPO_SLUG } from "@/lib/config";
 import { DEFAULT_AGENT_CONFIGS, type AgentConfig } from "@/lib/agent-config";
 import { useI18n } from "@/components/I18nProvider";
 
@@ -29,18 +28,13 @@ export function QuickInstallClient({
   const agentConfig = agents.find((a) => a.id === agent) ?? agents[0] ?? DEFAULT_AGENT_CONFIGS[0];
   const targetDir = scope === "project" ? agentConfig.projectDir : agentConfig.globalDir;
 
-  // Generate the installation command
+  // Generate the installation command using skills.sh CLI
   const cmd = useMemo(() => {
-    if (!REPO_SLUG) {
-      return t("quickInstall.registryNotConfigured");
-    }
-
-    // NPX method using GitHub
-    const scopeFlag = scope === "global" ? " --scope global" : "";
-    const refFlag = REPO_REF && REPO_REF !== "main" ? ` --ref ${REPO_REF}` : "";
+    const scopeFlag = scope === "global" ? " --global" : "";
+    const agentFlag = ` --agent ${agent}`;
     const header = t("quickInstall.installComment", { skillId, targetDir });
     return `${header}
-npx github:${REPO_SLUG} add ${skillId} --agent ${agent}${scopeFlag}${refFlag}`;
+npx skills add ${skillId}${agentFlag}${scopeFlag}`;
   }, [skillId, targetDir, agent, scope, t]);
 
   const note = useMemo(() => {
