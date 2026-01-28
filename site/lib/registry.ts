@@ -84,7 +84,8 @@ export function repoFilePath(repoPath: string): string {
 
 /**
  * Get skill cache directory path
+ * Cache is at repo root: ../.cache/skills/<skillId>
  */
 export function skillCachePath(skillId: string): string {
-  return path.resolve(siteRoot(), ".cache", "skills", skillId);
+  return path.resolve(siteRoot(), "..", ".cache", "skills", skillId);
 }
