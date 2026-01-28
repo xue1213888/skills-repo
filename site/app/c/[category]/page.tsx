@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { CategoryPageClient } from "./CategoryPageClient";
 import { loadRegistryCategories, loadRegistryIndex } from "@/lib/registry";
-import { getLocalizedText, DEFAULT_LOCALE } from "@/lib/i18n";
+import { getLocalizedText, DEFAULT_LOCALE, LOCALE_OPTIONS } from "@/lib/i18n";
 
 export const dynamicParams = false;
 
@@ -28,7 +28,16 @@ export async function generateMetadata({
 
   return {
     title,
-    description
+    description,
+    alternates: {
+      canonical: `/c/${category}`,
+      languages: Object.fromEntries(
+        LOCALE_OPTIONS.map(opt => [
+          opt.locale,
+          opt.locale === DEFAULT_LOCALE ? `/c/${category}` : `/${opt.locale}/c/${category}`
+        ])
+      )
+    }
   };
 }
 

@@ -1,10 +1,22 @@
+import type { Metadata } from "next";
 import { CategoriesPageClient } from "./CategoriesPageClient";
 import { loadRegistryCategories, loadRegistryIndex } from "@/lib/registry";
+import { LOCALE_OPTIONS, DEFAULT_LOCALE } from "@/lib/i18n";
 
 export const dynamic = "error";
 
-export const metadata = {
-  title: "Categories"
+export const metadata: Metadata = {
+  title: "Categories",
+  description: "Browse skills organized by categories including Development, Design, DevOps, Documentation, and more.",
+  alternates: {
+    canonical: "/categories",
+    languages: Object.fromEntries(
+      LOCALE_OPTIONS.map(opt => [
+        opt.locale,
+        opt.locale === DEFAULT_LOCALE ? '/categories' : `/${opt.locale}/categories`
+      ])
+    )
+  }
 };
 
 export default async function CategoriesPage() {

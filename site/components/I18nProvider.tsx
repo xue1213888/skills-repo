@@ -49,15 +49,25 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
     const firstSegment = segments[0];
 
     let newPath;
+
+    // Check if current path has a locale prefix
     if (firstSegment && isLocale(firstSegment)) {
-      // Replace existing locale
-      segments[0] = next;
-      newPath = '/' + segments.join('/');
-    } else {
-      // Add locale prefix (unless it's default)
+      // Remove the locale prefix
+      const pathWithoutLocale = '/' + segments.slice(1).join('/');
+
+      // Add new locale prefix (unless it's default)
       if (next === DEFAULT_LOCALE) {
+        newPath = pathWithoutLocale || '/';
+      } else {
+        newPath = '/' + next + pathWithoutLocale;
+      }
+    } else {
+      // Current path has no locale prefix (default locale)
+      if (next === DEFAULT_LOCALE) {
+        // Stay on current path
         newPath = window.location.pathname;
       } else {
+        // Add locale prefix
         newPath = '/' + next + window.location.pathname;
       }
     }

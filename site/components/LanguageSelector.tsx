@@ -4,18 +4,18 @@ import { useState, useRef, useEffect } from "react";
 import { useI18n } from "./I18nProvider";
 import { LOCALE_OPTIONS, type Locale } from "@/lib/i18n";
 
-// Language display names and flags (using Unicode regional indicators)
-const LANGUAGE_LABELS: Record<Locale, { name: string; nativeName: string; flag: string }> = {
-  "en": { name: "English", nativeName: "English", flag: "🇬🇧" },
-  "zh-CN": { name: "Chinese (Simplified)", nativeName: "简体中文", flag: "🇨🇳" },
-  "zh-TW": { name: "Chinese (Traditional)", nativeName: "繁體中文", flag: "🇹🇼" },
-  "ja": { name: "Japanese", nativeName: "日本語", flag: "🇯🇵" },
-  "ko": { name: "Korean", nativeName: "한국어", flag: "🇰🇷" },
-  "de": { name: "German", nativeName: "Deutsch", flag: "🇩🇪" },
-  "es": { name: "Spanish", nativeName: "Español", flag: "🇪🇸" },
-  "fr": { name: "French", nativeName: "Français", flag: "🇫🇷" },
-  "pt": { name: "Portuguese", nativeName: "Português", flag: "🇵🇹" },
-  "ru": { name: "Russian", nativeName: "Русский", flag: "🇷🇺" }
+// Language display names (native names only)
+const LANGUAGE_LABELS: Record<Locale, string> = {
+  "en": "English",
+  "zh-CN": "简体中文",
+  "zh-TW": "繁體中文",
+  "ja": "日本語",
+  "ko": "한국어",
+  "de": "Deutsch",
+  "es": "Español",
+  "fr": "Français",
+  "pt": "Português",
+  "ru": "Русский"
 };
 
 export function LanguageSelector() {
@@ -83,20 +83,15 @@ export function LanguageSelector() {
           transition-colors duration-200
           cursor-pointer
           focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2
-          min-w-[44px] min-h-[44px]
+          min-w-[120px] min-h-[44px]
         "
         aria-label="Select language"
         aria-expanded={isOpen}
         aria-haspopup="listbox"
       >
-        {/* Flag */}
-        <span className="text-xl leading-none" aria-hidden="true">
-          {currentLang.flag}
-        </span>
-
-        {/* Language Code - Hidden on mobile, shown on tablet+ */}
-        <span className="hidden sm:inline">
-          {currentLang.nativeName}
+        {/* Current Language */}
+        <span className="flex-1 text-left">
+          {currentLang}
         </span>
 
         {/* Chevron Icon */}
@@ -124,7 +119,7 @@ export function LanguageSelector() {
           aria-label="Language options"
           className="
             absolute right-0 top-[calc(100%+0.5rem)]
-            w-64
+            w-48
             bg-card
             border border-border
             rounded-xl
@@ -148,7 +143,7 @@ export function LanguageSelector() {
                   aria-selected={isSelected}
                   className={`
                     w-full
-                    flex items-center gap-3
+                    flex items-center justify-between
                     px-4 py-3
                     text-left
                     transition-colors duration-150
@@ -161,20 +156,8 @@ export function LanguageSelector() {
                     }
                   `}
                 >
-                  {/* Flag */}
-                  <span className="text-2xl leading-none shrink-0" aria-hidden="true">
-                    {lang.flag}
-                  </span>
-
-                  {/* Language Names */}
-                  <div className="flex-1 min-w-0">
-                    <div className="font-medium truncate">
-                      {lang.nativeName}
-                    </div>
-                    <div className="text-xs text-muted truncate">
-                      {lang.name}
-                    </div>
-                  </div>
+                  {/* Language Name */}
+                  <span>{lang}</span>
 
                   {/* Check Icon for selected */}
                   {isSelected && (
