@@ -15,7 +15,6 @@ import { FileTreeClient } from "@/components/FileTreeClient";
 import { MarkdownCodeBlock } from "@/components/CodeBlock";
 import type { MessageKey } from "@/lib/i18n";
 import { LOCALE_OPTIONS, DEFAULT_LOCALE, isLocale } from "@/lib/i18n";
-import { loadAgentConfigs } from "@/lib/agents";
 import { getSkillById, loadRegistryIndex, skillCachePath, repoFilePath } from "@/lib/registry";
 
 export const dynamicParams = false;
@@ -403,7 +402,6 @@ export default async function LocaleSkillPage({ params }: { params: Promise<{ lo
   const sourcePath = skill.source?.path ?? "";
   const sourceRef = skill.source?.ref ?? "";
   const sourceCommit = skill.source?.syncedCommit ?? "";
-  const agentConfigs = await loadAgentConfigs();
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(260px,320px)] gap-6 items-start">
@@ -465,11 +463,8 @@ export default async function LocaleSkillPage({ params }: { params: Promise<{ lo
 
       <aside className="min-w-0 space-y-4 order-1 lg:order-2 lg:sticky lg:top-[var(--app-header-height)] lg:max-h-[calc(100vh-var(--app-header-height)-24px)] lg:overflow-y-auto">
         <section className="p-5 bg-card border border-border rounded-xl">
-          <h2 className="font-heading text-lg font-semibold text-foreground"><T k="skill.quickInstall" /></h2>
-          <p className="text-secondary text-sm mt-2"><T k="skill.quickInstallDescription" /></p>
-          <div className="mt-4">
-            <QuickInstallClient skillId={skill.id} declaredAgents={skill.agents} agentConfigs={agentConfigs} />
-          </div>
+          <h2 className="font-heading text-lg font-semibold text-foreground mb-3"><T k="skill.quickInstall" /></h2>
+          <QuickInstallClient skillId={skill.id} sourceRepo={sourceRepo} />
         </section>
 
         <section className="p-5 bg-card border border-border rounded-xl">

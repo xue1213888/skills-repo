@@ -111,7 +111,7 @@ const en = {
   "quickInstall.installComment": "# Install {skillId} to {targetDir}",
   "quickInstall.note":
     "Uses {npx} to install directly from GitHub. No npm installation required. The {manifest} file is excluded (internal metadata).",
-  "quickInstall.registryNotConfigured": "# Registry URL not configured",
+  "quickInstall.sourceNotConfigured": "# Source repository not configured",
   "quickInstall.notDeclaredSuffix": " (not declared)",
 
   "fileTree.filesCount": "{count} files",
@@ -284,7 +284,7 @@ const zhCN: Messages = {
   "quickInstall.installCommand": "安装命令",
   "quickInstall.installComment": "# 安装 {skillId} 到 {targetDir}",
   "quickInstall.note": "使用 {npx} 直接从 GitHub 安装，无需安装 npm 包。会排除 {manifest}（内部元数据）。",
-  "quickInstall.registryNotConfigured": "# 未配置 Registry URL",
+  "quickInstall.sourceNotConfigured": "# 未配置源仓库",
   "quickInstall.notDeclaredSuffix": " （未声明）",
 
   "fileTree.filesCount": "{count} 个文件",
@@ -449,7 +449,7 @@ const zhTW: Messages = {
   "quickInstall.installCommand": "安裝指令",
   "quickInstall.installComment": "# 安裝 {skillId} 到 {targetDir}",
   "quickInstall.note": "使用 {npx} 直接從 GitHub 安裝，無需安裝 npm 套件。會排除 {manifest}（內部中繼資料）。",
-  "quickInstall.registryNotConfigured": "# 未設定 Registry URL",
+  "quickInstall.sourceNotConfigured": "# 未設定來源倉庫",
   "quickInstall.notDeclaredSuffix": " （未宣告）",
 
   "fileTree.filesCount": "{count} 個檔案",
@@ -614,7 +614,7 @@ const ja: Messages = {
   "quickInstall.installCommand": "インストールコマンド",
   "quickInstall.installComment": "# {skillId} を {targetDir} にインストール",
   "quickInstall.note": "{npx} を使用して GitHub から直接インストールします。npm のインストールは不要です。{manifest}（内部メタデータ）は除外されます。",
-  "quickInstall.registryNotConfigured": "# Registry URL が未設定です",
+  "quickInstall.sourceNotConfigured": "# ソースリポジトリが設定されていません",
   "quickInstall.notDeclaredSuffix": " （未宣言）",
 
   "fileTree.filesCount": "{count} 件のファイル",
@@ -779,7 +779,7 @@ const ko: Messages = {
   "quickInstall.installCommand": "설치 명령",
   "quickInstall.installComment": "# {skillId}을(를) {targetDir}에 설치",
   "quickInstall.note": "{npx}로 GitHub에서 직접 설치합니다. npm 설치는 필요 없습니다. {manifest}(내부 메타데이터)은 제외됩니다.",
-  "quickInstall.registryNotConfigured": "# Registry URL이 구성되지 않음",
+  "quickInstall.sourceNotConfigured": "# 소스 저장소가 구성되지 않음",
   "quickInstall.notDeclaredSuffix": " (선언되지 않음)",
 
   "fileTree.filesCount": "{count}개 파일",
@@ -944,7 +944,7 @@ const de: Messages = {
   "quickInstall.installCommand": "Installationsbefehl",
   "quickInstall.installComment": "# Installiere {skillId} nach {targetDir}",
   "quickInstall.note": "Installiert mit {npx} direkt von GitHub. Keine npm-Installation nötig. {manifest} (interne Metadaten) wird ausgeschlossen.",
-  "quickInstall.registryNotConfigured": "# Registry-URL nicht konfiguriert",
+  "quickInstall.sourceNotConfigured": "# Quell-Repository nicht konfiguriert",
   "quickInstall.notDeclaredSuffix": " (nicht deklariert)",
 
   "fileTree.filesCount": "{count} Dateien",
@@ -1112,7 +1112,7 @@ const es: Messages = {
   "quickInstall.installCommand": "Comando de instalación",
   "quickInstall.installComment": "# Instalar {skillId} en {targetDir}",
   "quickInstall.note": "Usa {npx} para instalar directamente desde GitHub. No requiere instalación de npm. Se excluye {manifest} (metadatos internos).",
-  "quickInstall.registryNotConfigured": "# URL del registro no configurada",
+  "quickInstall.sourceNotConfigured": "# Repositorio de origen no configurado",
   "quickInstall.notDeclaredSuffix": " (no declarado)",
 
   "fileTree.filesCount": "{count} archivos",
@@ -1282,7 +1282,7 @@ const fr: Messages = {
   "quickInstall.note":
     "Utilise {npx} pour installer directement depuis GitHub. Aucune installation npm requise. Le fichier {manifest} (métadonnées internes) est exclu.",
   "quickInstall.installComment": "# Installer {skillId} dans {targetDir}",
-  "quickInstall.registryNotConfigured": "# URL du registre non configurée",
+  "quickInstall.sourceNotConfigured": "# Dépôt source non configuré",
   "quickInstall.notDeclaredSuffix": " (non déclaré)",
 
   "fileTree.filesCount": "{count} fichiers",
@@ -1451,7 +1451,7 @@ const pt: Messages = {
   "quickInstall.installCommand": "Comando de instalação",
   "quickInstall.installComment": "# Instalar {skillId} em {targetDir}",
   "quickInstall.note": "Usa {npx} para instalar diretamente do GitHub. Não requer instalação via npm. O arquivo {manifest} (metadados internos) é excluído.",
-  "quickInstall.registryNotConfigured": "# URL do registro não configurada",
+  "quickInstall.sourceNotConfigured": "# Repositório de origem não configurado",
   "quickInstall.notDeclaredSuffix": " (não declarado)",
 
   "fileTree.filesCount": "{count} arquivos",
@@ -1619,7 +1619,7 @@ const ru: Messages = {
   "quickInstall.installCommand": "Команда установки",
   "quickInstall.installComment": "# Установить {skillId} в {targetDir}",
   "quickInstall.note": "Использует {npx} для установки напрямую с GitHub. Установка npm не требуется. Файл {manifest} (внутренние метаданные) исключается.",
-  "quickInstall.registryNotConfigured": "# URL реестра не настроен",
+  "quickInstall.sourceNotConfigured": "# Репозиторий-источник не настроен",
   "quickInstall.notDeclaredSuffix": " (не объявлено)",
 
   "fileTree.filesCount": "{count} файлов",
