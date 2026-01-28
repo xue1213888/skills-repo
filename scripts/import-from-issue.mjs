@@ -1,3 +1,7 @@
+// scripts/import-from-issue.mjs (v2 - metadata only)
+// This script only creates .x_skill.yaml metadata files.
+// Actual skill files are fetched during build by sync-skill-files.mjs
+
 import { spawnSync } from "node:child_process";
 import fs from "node:fs/promises";
 import os from "node:os";
@@ -143,44 +147,6 @@ function parseRequest(issueBody) {
   };
 }
 
-async function copyDirChecked(srcDir, destDir, limits, excludePatterns = []) {
-  await fs.mkdir(destDir, { recursive: true });
-  let entries = await fs.readdir(srcDir, { withFileTypes: true });
-
-  for (let e of entries) {
-    // Skip common non-skill directories and files
-    if (e.name === ".git" || e.name === "node_modules" || e.name === ".next" || e.name === "dist" || e.name === "out") continue;
-    // Skip .x_skill.yaml and skill.yaml from source (we generate our own)
-    if (e.name === ".x_skill.yaml" || e.name === "skill.yaml") continue;
-    // Skip any excluded patterns
-    if (excludePatterns.some(p => e.name === p || e.name.match(new RegExp(p)))) continue;
-
-    let src = path.join(srcDir, e.name);
-    let dest = path.join(destDir, e.name);
-
-    let st = await fs.lstat(src);
-    if (st.isSymbolicLink()) {
-      console.warn(`⚠️  Skipping symlink: ${src}`);
-      continue;
-    }
-
-    if (st.isDirectory()) {
-      await copyDirChecked(src, dest, limits, excludePatterns);
-      continue;
-    }
-
-    if (!st.isFile()) continue;
-
-    limits.files += 1;
-    limits.bytes += st.size;
-    if (limits.files > limits.maxFiles) throw new Error(`Import too large: file limit exceeded (${limits.maxFiles})`);
-    if (limits.bytes > limits.maxBytes) throw new Error(`Import too large: byte limit exceeded (${limits.maxBytes})`);
-
-    await fs.mkdir(path.dirname(dest), { recursive: true });
-    await fs.copyFile(src, dest);
-  }
-}
-
 async function pathExists(p) {
   try {
     await fs.access(p);
@@ -265,8 +231,8 @@ async function main() {
       }
     }
 
-    let limits = { files: 0, bytes: 0, maxFiles: 2500, maxBytes: 50 * 1024 * 1024 };
-    await copyDirChecked(srcSkillDir, destSkillDir, limits);
+    // Create destination directory (metadata only - no file copying)
+    await fs.mkdir(destSkillDir, { recursive: true });
 
     // Generate .x_skill.yaml from issue content + SKILL.md description
     let meta = {
@@ -276,9 +242,6 @@ async function main() {
       description: description,
       category: item.targetCategory,
       tags: item.tags.length > 0 ? item.tags : undefined,
-      links: {
-        docs: "./SKILL.md"
-      },
       source: {
         repo: req.sourceRepo,
         path: item.sourcePath,
@@ -298,8 +261,9 @@ async function main() {
     imported.push({ id: item.id, dest: destSkillDir, sourcePath: item.sourcePath, isUpdate: item.isUpdate });
   }
 
-  console.log(`Imported ${imported.length} skill(s):`);
-  for (let i of imported) console.log(`- ${i.id} -> ${i.dest} (from ${i.sourcePath})${i.isUpdate ? " [UPDATE]" : ""}`);
+  console.log(`\nImported ${imported.length} skill(s) (metadata only):`);
+  for (let i of imported) console.log(`- ${i.id} -> ${i.dest}/.x_skill.yaml${i.isUpdate ? " [UPDATE]" : ""}`);
+  console.log(`\nNote: Skill files will be fetched during build by sync-skill-files.mjs`);
 }
 
 await main();

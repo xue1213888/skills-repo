@@ -12,7 +12,9 @@
   "scripts": {
     "validate": "node scripts/validate.mjs",
     "check:registry": "node scripts/check-registry-up-to-date.mjs",
-    "build:registry": "node scripts/build-registry.mjs",
+    "sync:skills": "node scripts/sync-skill-files.mjs",
+    "build:registry": "node scripts/sync-skill-files.mjs && node scripts/build-registry.mjs",
+    "build:registry:no-sync": "node scripts/build-registry.mjs",
     "sync:check": "node scripts/sync-check.mjs",
     "sync:fetch": "node scripts/sync-fetch.mjs",
     "sync": "npm run sync:check && npm run sync:fetch",
